@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @IdClass(CriminosoVitimaId.class)
-@Table(name = "CRIMINOSO_VITIMA_689386")
+@Table(name = "CRIMINOSO_VITIMA_689386_698159")
 public class CriminosoVitima {
     @Id
     @ManyToOne
