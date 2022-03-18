@@ -1,7 +1,8 @@
 package com.jcg.hibernate.crud.operations;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ArmaCrimeId {
+public class ArmaCrimeId implements Serializable {
     private int arma;
     private int crime;
 
@@ -12,6 +13,7 @@ public class ArmaCrimeId {
         this.arma = arma;
         this.crime = crime;
     }
+
 
     public int getArma() {
         return arma;

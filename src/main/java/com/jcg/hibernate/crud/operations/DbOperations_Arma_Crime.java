@@ -95,7 +95,7 @@ public class DbOperations_Arma_Crime {
 			sessionObj.beginTransaction();
 
 			// Creating Transaction Entity
-			ArmaCrime armaCrimeObj = (ArmaCrime) sessionObj.get(ArmaCrime.class, armaCrime.getCrime());//to com duvida se nesse caso seria assim mesmo
+			ArmaCrime armaCrimeObj = (ArmaCrime) sessionObj.get( ArmaCrime.class,(new ArmaCrimeId(armaCrime.getArma().getId(),armaCrime.getCrime().getId())));
 			armaCrimeObj = armaCrime;
 
 

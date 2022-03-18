@@ -1,9 +1,12 @@
 package com.jcg.hibernate.crud.operations;
 import javax.persistence.*;
+import java.util.Objects;
+import java.io.Serializable;
+
 @Entity
 @IdClass(ArmaCrimeId.class)
 @Table(name="ARMA_CRIME_689386_698159")
-public class ArmaCrime {
+public class ArmaCrime implements Serializable{
     @Id
     @ManyToOne
     @JoinColumn(name="crime_id")
@@ -45,4 +48,6 @@ public class ArmaCrime {
                 ", arma=" + arma +
                 '}';
     }
+
+
 }
