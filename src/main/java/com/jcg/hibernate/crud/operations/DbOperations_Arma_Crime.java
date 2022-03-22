@@ -71,7 +71,7 @@ public class DbOperations_Arma_Crime {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			armaCrimeList = sessionObj.createQuery("FROM ARMA_689386_698159").list();
+			armaCrimeList = sessionObj.createQuery("FROM ArmaCrime").list();
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -170,7 +170,7 @@ public class DbOperations_Arma_Crime {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			Query queryObj = sessionObj.createQuery("DELETE FROM ARMA_CRIME_689386_698159");
+			Query queryObj = sessionObj.createQuery("DELETE FROM ArmaCrime");
 			queryObj.executeUpdate();
 
 			// Committing The Transactions To The Database

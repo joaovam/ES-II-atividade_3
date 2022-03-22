@@ -1,6 +1,7 @@
 package com.jcg.hibernate.crud.operations;
+import java.io.Serializable;
 import java.util.Objects;
-public class VitimaCrimeId {
+public class VitimaCrimeId implements Serializable {
     private int vitima;
     private int crime;
 

@@ -24,7 +24,7 @@ public class DbOperations_Criminoso {
 		configObj.configure("hibernate.cfg.xml");
 
 		// Since Hibernate Version 4.x, ServiceRegistry Is Being Used
-		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build(); 
+		ServiceRegistry serviceRegistryObj = new StandardServiceRegistryBuilder().applySettings(configObj.getProperties()).build();
 
 		// Creating Hibernate SessionFactory Instance
 		sessionFactoryObj = configObj.buildSessionFactory(serviceRegistryObj);
@@ -71,10 +71,12 @@ public class DbOperations_Criminoso {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			criminosoList = sessionObj.createQuery("FROM CRIMINOSO_689386_698159").list();
-		} catch(Exception sqlException) {
+			criminosoList = sessionObj.createQuery("FROM Criminoso").list();
+
+		}catch (Exception sqlException) {
+			System.out.println(sqlException.getMessage());
 			if(null != sessionObj.getTransaction()) {
-				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
+				System.out.println("\n.......Transaction Is Being Rolled Back....... \n" + sqlException.getMessage());
 				sessionObj.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
@@ -187,5 +189,24 @@ public class DbOperations_Criminoso {
 				sessionObj.close();
 			}
 		}
+	}
+
+	public static Criminoso getByName(String nomeDigitado) {
+		Criminoso findCriminosoObj = null;
+		try {
+			// Getting Session Object From SessionFactory
+			sessionObj = buildSessionFactory().openSession();
+			// Getting Transaction Object From Session Object
+			sessionObj.beginTransaction();
+			findCriminosoObj = (Criminoso) sessionObj.load(Criminoso.class, nomeDigitado);
+
+		} catch(Exception sqlException) {
+			if(null != sessionObj.getTransaction()) {
+				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
+				sessionObj.getTransaction().rollback();
+			}
+			sqlException.printStackTrace();
+		}
+		return findCriminosoObj;
 	}
 }

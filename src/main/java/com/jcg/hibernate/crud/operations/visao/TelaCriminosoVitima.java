@@ -150,7 +150,7 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
         c.setTelefone(this.txtTel.getText());
         return c;
     }
-    public void carregaContatonaTela(Contato c2){
+    public void carregaCriminosonaTela(Contato c2){
 //        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
 //        this.txtNome.setText(c2.getNome());
 //        this.txtEndereco.setText(c2.getEndereco());
@@ -186,9 +186,9 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
             //Preenche Combobox com registros do banco de dados
             CriminosoVitimaCT mbc = new CriminosoVitimaCT();
             List<Vitima> VitimaBd = mbc.getVitimas();
-           cbPesquisarCriminoso.removeAllItems();
+            cbPesquisarVitima.removeAllItems();
             for (Vitima vitima : VitimaBd) {
-                cbPesquisarCriminoso.addItem(vitima.getNome());
+                cbPesquisarVitima.addItem(vitima.getNome());
             }
     }
 
@@ -213,17 +213,19 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
               } else
             if(e.getActionCommand().equals(this.btnPesquisar.getActionCommand())){
                 //Condicional - se clicar no botão buscar ...
-//                controle.ContatoCT cbc = new ContatoCT();
+                CriminosoVitimaCT criminosoVitimaCT = new CriminosoVitimaCT();
+                this.carregaListaCriminoso();
+                this.carregaListaVitima();
                 //Instancia a classe de controle ContatoCT;
-                String nomeDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
-//                Contato cbusca = cbc.select(nomeDigitado);
-//                if  (cbusca.getNome().equals(nomeDigitado))
-//                { JOptionPane.showMessageDialog(null, "Contato encontrado!");
-//                    this.carregaContatonaTela(cbusca);}
-//                else
-//                {      JOptionPane.showMessageDialog(null, "Contato nao cadastrado...");
-//
-//                }
+                 String nomeDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
+                 Criminoso cbusca = criminosoVitimaCT.select(nomeDigitado);
+                if  (cbusca.getNome().equals(nomeDigitado))
+                { JOptionPane.showMessageDialog(null, "Contato encontrado!");
+                    this.carregaCriminosonaTela(null);}
+                else
+                {      JOptionPane.showMessageDialog(null, "Contato nao cadastrado...");
+
+                }
             } else
             if(e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
               this.limpaTela();

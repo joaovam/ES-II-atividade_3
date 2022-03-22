@@ -22,4 +22,7 @@ public class CriminosoVitimaCT {
         DbOperations_Criminoso_Vitima.createCriminosoVitima(criminosoVitima);
     }
 
+    public Criminoso select(String nomeDigitado) {
+        return DbOperations_Criminoso.getByName(nomeDigitado);
+    }
 }

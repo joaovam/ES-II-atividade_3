@@ -128,7 +128,7 @@ public class DbOperations {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			armasList = sessionObj.createQuery("FROM ARMA_689386_698159").list();
+			armasList = sessionObj.createQuery("FROM Arma").list();
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");

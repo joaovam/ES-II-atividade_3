@@ -72,7 +72,7 @@ public class DbOperations_Vitima {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			vitimaList = sessionObj.createQuery("FROM VITIMA_689386_698159").list();
+			vitimaList = sessionObj.createQuery("FROM Vitima").list();
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -171,7 +171,7 @@ public class DbOperations_Vitima {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			Query queryObj = sessionObj.createQuery("DELETE FROM VITIMA_689386_698159");
+			Query queryObj = sessionObj.createQuery("DELETE FROM Vitima");
 			queryObj.executeUpdate();
 
 			// Committing The Transactions To The Database
