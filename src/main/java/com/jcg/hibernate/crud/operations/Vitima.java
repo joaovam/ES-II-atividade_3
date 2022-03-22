@@ -27,8 +27,12 @@ public class Vitima implements Serializable {
 	@Column(name="cpf")
 	private String cpf;
 
-	@OneToMany(mappedBy = "criminoso")
+	@OneToMany(mappedBy = "vitima")
 	private List<CriminosoVitima> criminosoVitima;
+
+	@OneToMany(mappedBy = "vitima")
+	private List<VitimaCrime> vitimaCrimes;
+
 
 	public Vitima() {
 	}

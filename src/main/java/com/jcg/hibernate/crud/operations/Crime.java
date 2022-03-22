@@ -32,8 +32,15 @@ public class Crime implements Serializable {
 	@Column(name="visto")
 	private boolean visto;
 
-	@OneToMany(mappedBy = "criminoso")
+	@OneToMany(mappedBy = "crime")
 	private List<CriminosoCrime> criminosoCrimes;
+
+	@OneToMany(mappedBy = "crime")
+	private List<VitimaCrime> vitimaCrimes;
+
+	@OneToMany(mappedBy = "crime")
+	private List<ArmaCrime> armaCrimes;
+
 
 	public int getId() {
 		return id;

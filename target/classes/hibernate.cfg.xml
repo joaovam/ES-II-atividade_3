@@ -23,10 +23,14 @@
 
 		<!-- Mapping With Model Class Containing Annotations -->
 		<mapping class="com.jcg.hibernate.crud.operations.Contato" />
-		<mapping class="com.jcg.hibernate.crud.operations.Crime" />
 		<mapping class="com.jcg.hibernate.crud.operations.Criminoso" />
 		<mapping class="com.jcg.hibernate.crud.operations.Vitima" />
+		<mapping class="com.jcg.hibernate.crud.operations.Crime" />
 		<mapping class="com.jcg.hibernate.crud.operations.CriminosoVitima" />
 		<mapping class="com.jcg.hibernate.crud.operations.CriminosoCrime" />
+		<mapping class="com.jcg.hibernate.crud.operations.VitimaCrime" />
+		<mapping class="com.jcg.hibernate.crud.operations.ArmaCrime" />
+		<mapping class="com.jcg.hibernate.crud.operations.Arma" />
+
 	</session-factory>
 </hibernate-configuration>

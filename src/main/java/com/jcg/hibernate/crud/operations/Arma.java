@@ -2,6 +2,7 @@ package com.jcg.hibernate.crud.operations;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="ARMA_689386_698159")
@@ -16,6 +17,9 @@ public class Arma implements Serializable {
 
     @Column(name="nome")
     private String nome;
+
+    @OneToMany(mappedBy = "arma")
+    private List<ArmaCrime> armaCrimes;
 
     public int getId() {
         return id;
