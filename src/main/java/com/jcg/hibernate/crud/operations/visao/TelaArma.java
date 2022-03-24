@@ -124,12 +124,10 @@ public class TelaArma extends JFrame implements ActionListener {
         c.setTipo(this.txtTipo.getText());
         return c;
     }
-    public void carregaContatonaTela(Contato c2){
-//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-//        this.txtNome.setText(c2.getNome());
-//        this.txtEndereco.setText(c2.getEndereco());
-//        this.txtTel.setText(c2.getTelefone());
-
+    public void carregaArmanaTela(Arma c2){
+        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
+        this.txtNome.setText(c2.getNome());
+        this.txtTipo.setText(c2.getTipo());
     }
 
     public void limpaTela(){
