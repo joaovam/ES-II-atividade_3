@@ -157,6 +157,13 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
 //        this.txtTel.setText(c2.getTelefone());
 
     }
+    public void carregaCriminosonaTela(Criminoso criminoso){
+//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
+//        this.txtNome.setText(c2.getNome());
+//        this.txtEndereco.setText(c2.getEndereco());
+//        this.txtTel.setText(c2.getTelefone());
+
+    }
 
     public void limpaTela(){
               for(int i = 0; i < contentPane.getComponentCount(); i++){
@@ -179,7 +186,7 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
             List<Criminoso> CriminosoBd = mbc.getCriminosos();
            cbPesquisarCriminoso.removeAllItems();
             for (Criminoso criminoso : CriminosoBd) {
-                cbPesquisarCriminoso.addItem(criminoso.getNome());
+                cbPesquisarCriminoso.addItem(criminoso.getId() + "-" + criminoso.getNome());
             }
     }
     public void carregaListaVitima(){
@@ -190,6 +197,7 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
             for (Vitima vitima : VitimaBd) {
                 cbPesquisarVitima.addItem(vitima.getNome());
             }
+
     }
 
     @Override
@@ -220,8 +228,8 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
                  String nomeDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
                  Criminoso cbusca = criminosoVitimaCT.select(nomeDigitado);
                 if  (cbusca.getNome().equals(nomeDigitado))
-                { JOptionPane.showMessageDialog(null, "Contato encontrado!");
-                    this.carregaCriminosonaTela(null);}
+                { JOptionPane.showMessageDialog(null, "Criminoso encontrado!");
+                    this.carregaCriminosonaTela(new Criminoso());}
                 else
                 {      JOptionPane.showMessageDialog(null, "Contato nao cadastrado...");
 

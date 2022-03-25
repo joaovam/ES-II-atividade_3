@@ -1,6 +1,7 @@
 package com.jcg.hibernate.crud.operations;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -98,9 +99,10 @@ public class DbOperations_Criminoso {
 
 			// Creating Transaction Entity
 			Criminoso criminosoObj = (Criminoso) sessionObj.get(Criminoso.class, criminoso.getId());
-			criminosoObj = criminoso;
-
-
+			criminosoObj.setNome(criminoso.getNome());
+			criminosoObj.setGenero(criminoso.getGenero());
+			criminosoObj.setCpf(criminoso.getCpf());
+			criminosoObj.setIdade(criminoso.getIdade());
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
 			System.out.println("\nContato With Id?= " + criminosoObj.getId() + " Is Successfully Updated In The Database!\n");
@@ -198,7 +200,9 @@ public class DbOperations_Criminoso {
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
-			findCriminosoObj = (Criminoso) sessionObj.load(Criminoso.class, nomeDigitado);
+
+			findCriminosoObj = (Criminoso) sessionObj.createQuery("from Criminoso where nome = :nome").setParameter("nome", nomeDigitado).uniqueResult();
+
 
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
