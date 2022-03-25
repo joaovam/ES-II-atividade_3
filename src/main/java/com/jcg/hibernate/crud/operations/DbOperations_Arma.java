@@ -188,4 +188,25 @@ public class DbOperations_Arma {
 			}
 		}
 	}
+
+	public static Arma getByName(String nomeDigitado) {
+		Arma armaObj = null;
+		try {
+			// Getting Session Object From SessionFactory
+			sessionObj = buildSessionFactory().openSession();
+			// Getting Transaction Object From Session Object
+			sessionObj.beginTransaction();
+
+			armaObj = (Arma) sessionObj.createQuery("from Arma where nome = :nome").setParameter("nome", nomeDigitado).uniqueResult();
+
+
+		} catch(Exception sqlException) {
+			if(null != sessionObj.getTransaction()) {
+				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
+				sessionObj.getTransaction().rollback();
+			}
+			sqlException.printStackTrace();
+		}
+		return armaObj;
+	}
 }

@@ -20,11 +20,13 @@ public class CriminosoCrime {
 
     }
 
-    public CriminosoCrime(Criminoso criminoso, Crime crime, int id) {
+    public CriminosoCrime(Criminoso criminoso, Crime crime) {
         this.criminoso = criminoso;
         this.crime = crime;
 
     }
+
+
 
     public Criminoso getCriminoso() {
         return criminoso;
