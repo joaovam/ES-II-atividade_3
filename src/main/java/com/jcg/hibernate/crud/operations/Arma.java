@@ -21,6 +21,12 @@ public class Arma implements Serializable {
     @OneToMany(mappedBy = "arma")
     private List<ArmaCrime> armaCrimes;
 
+    public Arma() {
+    }
+
+    public Arma(int i, String tipo, String nome) {
+    }
+
     public int getId() {
         return id;
     }
