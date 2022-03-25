@@ -2,7 +2,7 @@ package com.jcg.hibernate.crud.operations;
 import javax.persistence.*;
 
 @Entity
-@IdClass(ArmaCrimeId.class)
+@IdClass(VitimaCrimeId.class)
 @Table(name="VITIMA_CRIME_689386_698159")
 public class VitimaCrime {
     @Id
