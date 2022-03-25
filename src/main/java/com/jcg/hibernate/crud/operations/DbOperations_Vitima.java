@@ -96,10 +96,11 @@ public class DbOperations_Vitima {
 			sessionObj.beginTransaction();
 
 			// Creating Transaction Entity
-			Vitima contatObj = (Vitima) sessionObj.get(Vitima.class, vitima.getId());
-			contatObj = vitima;
-
-
+			Vitima vitimaObj = (Vitima) sessionObj.get(Vitima.class, vitima.getId());
+			vitimaObj.setCpf(vitima.getCpf());
+			vitimaObj.setIdade(vitima.getIdade());
+			vitimaObj.setNome(vitima.getNome());
+			vitimaObj.setGenero(vitima.getGenero());
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
 			System.out.println("\nContato With Id?= " + vitima.getId() + " Is Successfully Updated In The Database!\n");
@@ -188,5 +189,26 @@ public class DbOperations_Vitima {
 				sessionObj.close();
 			}
 		}
+	}
+
+	public static Vitima getByName(String nomeDigitado) {
+		Vitima findVitimaObj = null;
+		try {
+			// Getting Session Object From SessionFactory
+			sessionObj = buildSessionFactory().openSession();
+			// Getting Transaction Object From Session Object
+			sessionObj.beginTransaction();
+
+			findVitimaObj = (Vitima) sessionObj.createQuery("from Vitima where nome = :nome").setParameter("nome", nomeDigitado).uniqueResult();
+
+
+		} catch(Exception sqlException) {
+			if(null != sessionObj.getTransaction()) {
+				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
+				sessionObj.getTransaction().rollback();
+			}
+			sqlException.printStackTrace();
+		}
+		return findVitimaObj;
 	}
 }

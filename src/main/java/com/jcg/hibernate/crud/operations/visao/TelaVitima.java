@@ -1,8 +1,7 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.Contato;
-import com.jcg.hibernate.crud.operations.Criminoso;
-import com.jcg.hibernate.crud.operations.controle.CriminosoCT;
+import com.jcg.hibernate.crud.operations.Vitima;
+import com.jcg.hibernate.crud.operations.controle.VitimaCT;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,14 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class TelaCriminoso extends JFrame implements ActionListener {
-    public CriminosoCT controle_criminoso = new CriminosoCT();
+public class TelaVitima extends JFrame implements ActionListener {
+    public VitimaCT controle_vitima = new VitimaCT();
 
     private JPanel contentPane;
-    private JTextField txtNomeCriminoso;
-    private JTextField txtIdadeCriminoso;
-    private JTextField txtCpfCriminoso;
-    private JTextField txtGeneroCriminoso;
+    private JTextField txtNomeVitima;
+    private JTextField txtIdadeVitima;
+    private JTextField txtCpfVitima;
+    private JTextField txtGeneroVitima;
 
 
     private JTextField txtTel;
@@ -33,8 +32,8 @@ public class TelaCriminoso extends JFrame implements ActionListener {
     private JButton btnPesquisar;
     private JButton btnLimpar;
 
-    public TelaCriminoso() {
-        setTitle("Cadastro de Criminosos");
+    public TelaVitima() {
+        setTitle("Cadastro de Vitimas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 556, 413);
         contentPane = new JPanel();
@@ -73,30 +72,29 @@ public class TelaCriminoso extends JFrame implements ActionListener {
 
         contentPane.add(cbPesquisar);
 
-        txtNomeCriminoso = new JTextField();
-        txtNomeCriminoso.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtNomeCriminoso.setBounds(129, 76, 283, 20);
-        contentPane.add(txtNomeCriminoso);
-        txtNomeCriminoso.setColumns(10);
+        txtNomeVitima = new JTextField();
+        txtNomeVitima.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        txtNomeVitima.setBounds(129, 76, 283, 20);
+        contentPane.add(txtNomeVitima);
+        txtNomeVitima.setColumns(10);
 
-        txtCpfCriminoso = new JTextField();
-        txtCpfCriminoso.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtCpfCriminoso.setBounds(129, 101, 365, 20);
-        contentPane.add(txtCpfCriminoso);
-        txtCpfCriminoso.setColumns(10);
+        txtCpfVitima = new JTextField();
+        txtCpfVitima.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        txtCpfVitima.setBounds(129, 101, 365, 20);
+        contentPane.add(txtCpfVitima);
+        txtCpfVitima.setColumns(10);
 
-        txtIdadeCriminoso = new JTextField();
-        txtIdadeCriminoso.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtIdadeCriminoso.setBounds(129, 126, 365, 20);
-        contentPane.add(txtIdadeCriminoso);
-        txtIdadeCriminoso.setColumns(10);
+        txtIdadeVitima = new JTextField();
+        txtIdadeVitima.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        txtIdadeVitima.setBounds(129, 126, 365, 20);
+        contentPane.add(txtIdadeVitima);
+        txtIdadeVitima.setColumns(10);
 
-        txtGeneroCriminoso = new JTextField();
-        txtGeneroCriminoso.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtGeneroCriminoso.setBounds(129, 151, 365, 20);
-        contentPane.add(txtGeneroCriminoso);
-        txtGeneroCriminoso.setColumns(10);
-
+        txtGeneroVitima = new JTextField();
+        txtGeneroVitima.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        txtGeneroVitima.setBounds(129, 151, 365, 20);
+        contentPane.add(txtGeneroVitima);
+        txtGeneroVitima.setColumns(10);
 
         btnSalvar = new JButton("Incluir");
         btnSalvar.setBounds(193, 327, 75, 23);
@@ -131,44 +129,34 @@ public class TelaCriminoso extends JFrame implements ActionListener {
         btnPesquisar.setActionCommand("pesquisar");
         contentPane.add(btnPesquisar);
         txtID = "";
-        this.carregaListaCriminoso();
+        this.carregaListaVitima();
     }
 
-
-    public Criminoso montaCriminoso() {
-        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Criminoso;
-        Criminoso c = new Criminoso();
-        c.setNome(this.txtNomeCriminoso.getText());
-        c.setCpf(this.txtCpfCriminoso.getText());
-        c.setIdade(Integer.valueOf(this.txtIdadeCriminoso.getText()));
-        c.setGenero(this.txtGeneroCriminoso.getText());
+    public Vitima montaVitima() {
+        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Vitima;
+        Vitima c = new Vitima();
+        c.setNome(this.txtNomeVitima.getText());
+        c.setCpf(this.txtCpfVitima.getText());
+        c.setIdade(Integer.valueOf(this.txtIdadeVitima.getText()));
+        c.setGenero(this.txtGeneroVitima.getText());
         return c;
     }
 
-
-    private Criminoso editaCriminoso(int id) {
-        Criminoso c = new Criminoso();
+    private Vitima editaVitima(int id) {
+        Vitima c = new Vitima();
         c.setId(id);
-        c.setNome(this.txtNomeCriminoso.getText());
-        c.setGenero(this.txtGeneroCriminoso.getText());
-        c.setIdade(Integer.valueOf(this.txtIdadeCriminoso.getText()));
-        c.setCpf(this.txtCpfCriminoso.getText());
+        c.setNome(this.txtNomeVitima.getText());
+        c.setGenero(this.txtGeneroVitima.getText());
+        c.setIdade(Integer.valueOf(this.txtIdadeVitima.getText()));
+        c.setCpf(this.txtCpfVitima.getText());
         return c;
     }
 
-    public void carregaContatonaTela(Contato c2) {
-//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-//        this.txtNome.setText(c2.getNome());
-//        this.txtEndereco.setText(c2.getEndereco());
-//        this.txtTel.setText(c2.getTelefone());
-
-    }
-
-    public void carregaCriminosonaTela(Criminoso c2) {
-        this.txtNomeCriminoso.setText(c2.getNome());
-        this.txtGeneroCriminoso.setText(c2.getGenero());
-        this.txtIdadeCriminoso.setText(String.valueOf(c2.getIdade()));
-        this.txtCpfCriminoso.setText(c2.getCpf());
+    public void carregaVitimanaTela(Vitima c2) {
+        this.txtNomeVitima.setText(c2.getNome());
+        this.txtGeneroVitima.setText(c2.getGenero());
+        this.txtIdadeVitima.setText(String.valueOf(c2.getIdade()));
+        this.txtCpfVitima.setText(c2.getCpf());
     }
 
     public void limpaTela() {
@@ -187,11 +175,11 @@ public class TelaCriminoso extends JFrame implements ActionListener {
     }
 
 
-    public void carregaListaCriminoso() {
-        List<Criminoso> criminosos = controle_criminoso.getCriminosos();
+    public void carregaListaVitima() {
+        List<Vitima> vitimas = controle_vitima.getVitimas();
         cbPesquisar.removeAllItems();
-        for (Criminoso criminoso : criminosos) {
-            cbPesquisar.addItem(criminoso.getNome().trim());
+        for (Vitima vitima : vitimas) {
+            cbPesquisar.addItem(vitima.getNome().trim());
 
         }
     }
@@ -200,26 +188,26 @@ public class TelaCriminoso extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(this.btnSalvar.getActionCommand())) {
             //Condicional - se clicar no botão Salvar ...
-            Criminoso c = this.montaCriminoso();
-            //Chama o método montaContato para pegar os dados e gravar no objeto c;
-            //Instancia a classe de controle CriminosoCT;
-            controle_criminoso.postCriminoso(c);
+            Vitima c = this.montaVitima();
+            //Chama o método montaVitima para pegar os dados e gravar no objeto c;
+            //Instancia a classe de controle VitimaCT;
+            controle_vitima.postVitima(c);
             this.limpaTela();
             //Limpa os campos após inserir/salvar dados no banco;
-            this.carregaListaCriminoso();
+            this.carregaListaVitima();
             //Carrega a lista do combobox, atualizando após inserção;
-            JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " cadastrado...");
+            JOptionPane.showMessageDialog(null, "Vitima " + txtNomeVitima.getText() + " cadastrado...");
             //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
         } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
-            //Instancia a classe de controle CriminosoCT;
+            //Instancia a classe de controle VitimaCT;
             String nomeDigitado = cbPesquisar.getSelectedItem().toString().trim();
-            Criminoso cbusca = controle_criminoso.select(nomeDigitado);
+            Vitima cbusca = controle_vitima.select(nomeDigitado);
             if (cbusca.getNome().contains(nomeDigitado.trim())) {
-                JOptionPane.showMessageDialog(null, "Criminoso encontrado!");
-                this.carregaCriminosonaTela(cbusca);
+                JOptionPane.showMessageDialog(null, "Vitima encontrado!");
+                this.carregaVitimanaTela(cbusca);
             } else {
-                JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Vitima nao cadastrado...");
 
             }
         } else if (e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
@@ -227,32 +215,32 @@ public class TelaCriminoso extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals(this.btnExcluir.getActionCommand())) {
 
 
-            Criminoso cbusca = controle_criminoso.select(cbPesquisar.getSelectedItem().toString());
+            Vitima cbusca = controle_vitima.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Vitima nao cadastrado...");
             else {
-                JOptionPane.showMessageDialog(null, "Criminoso excluido!");
-                this.carregaCriminosonaTela(cbusca);
-                controle_criminoso.delete(cbusca);
+                JOptionPane.showMessageDialog(null, "Vitima excluido!");
+                this.carregaVitimanaTela(cbusca);
+                controle_vitima.delete(cbusca);
                 this.limpaTela();
-                this.carregaListaCriminoso();
+                this.carregaListaVitima();
             }
         }
         if (e.getActionCommand().equals(this.btnEditar.getActionCommand())) {
 
-            //Instancia a classe de controle CriminosoCT;
-            Criminoso cbusca = controle_criminoso.select(cbPesquisar.getSelectedItem().toString());
+            //Instancia a classe de controle VitimaCT;
+            Vitima cbusca = controle_vitima.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Vitima nao cadastrado...");
             else {
-                JOptionPane.showMessageDialog(null, "Criminoso editado!");
-                cbusca.setCpf(txtCpfCriminoso.getText());
-                cbusca.setNome(txtNomeCriminoso.getText());
-                cbusca.setGenero(txtGeneroCriminoso.getText());
-                cbusca.setIdade(Integer.valueOf(txtIdadeCriminoso.getText()));
-                controle_criminoso.update(this.editaCriminoso(cbusca.getId()));
+                JOptionPane.showMessageDialog(null, "Vitima editado!");
+                cbusca.setCpf(txtCpfVitima.getText());
+                cbusca.setNome(txtNomeVitima.getText());
+                cbusca.setGenero(txtGeneroVitima.getText());
+                cbusca.setIdade(Integer.valueOf(txtIdadeVitima.getText()));
+                controle_vitima.update(this.editaVitima(cbusca.getId()));
                 this.limpaTela();
-                this.carregaListaCriminoso();
+                this.carregaListaVitima();
             }
         }
 
