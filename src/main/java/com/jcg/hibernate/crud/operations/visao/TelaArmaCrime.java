@@ -4,6 +4,7 @@ import com.jcg.hibernate.crud.operations.Contato;
 import com.jcg.hibernate.crud.operations.Criminoso;
 import com.jcg.hibernate.crud.operations.Vitima;
 import com.jcg.hibernate.crud.operations.controle.CriminosoVitimaCT;
+import com.jcg.hibernate.crud.operations.modelo.Criminoso;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

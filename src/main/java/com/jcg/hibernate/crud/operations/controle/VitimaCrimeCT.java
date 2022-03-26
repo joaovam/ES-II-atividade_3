@@ -13,8 +13,7 @@ public class VitimaCrimeCT {
     }
 
     public  List<Crime> getCrimes(){
-        List<Crime> crimes = DbOperations_Crime.displayCrimes();
-        return crimes;
+        return DbOperations_Crime.displayCrimes();
     }
 
     public void createVitimaCrime(Crime crime, Vitima vitima){

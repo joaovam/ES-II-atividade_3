@@ -4,6 +4,12 @@ import com.jcg.hibernate.crud.operations.Contato;
 import com.jcg.hibernate.crud.operations.Criminoso;
 import com.jcg.hibernate.crud.operations.Vitima;
 import com.jcg.hibernate.crud.operations.controle.CriminosoVitimaCT;
+import com.jcg.hibernate.crud.operations.controle.VitimaCrimeCT;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Crime;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Vitima;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Vitima_Crime;
+import com.jcg.hibernate.crud.operations.modelo.Crime;
+import com.jcg.hibernate.crud.operations.modelo.VitimaCrime;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -16,9 +22,9 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
 
     private JPanel contentPane;
     private JTextField txtNome;
-    private JTextField txtEndereco;
+    private JTextField txtIdCrime;
 
-    private JTextField txtTel;
+
     private String txtID;
     private JComboBox cbPesquisarCrime;
     private JComboBox cbPesquisarVitima;
@@ -45,20 +51,16 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
         lblPesquisar.setBounds(10, 31, 109, 14);
         contentPane.add(lblPesquisar);
 
-        JLabel lblNome = new JLabel("Nome:");
+        JLabel lblNome = new JLabel("Nome da Vitima:");
         lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
         lblNome.setBounds(10, 79, 109, 14);
         contentPane.add(lblNome);
 
-        JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-        lblEndereo.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblEndereo.setBounds(10, 104, 109, 14);
-        contentPane.add(lblEndereo);
+        JLabel lblIdCrime = new JLabel("Id do Crime");
+        lblIdCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        lblIdCrime.setBounds(10, 104, 109, 14);
+        contentPane.add(lblIdCrime);
 
-        JLabel lblTel = new JLabel("Telefone:");
-        lblTel.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblTel.setBounds(10, 129, 109, 14);
-        contentPane.add(lblTel);
 
         cbPesquisarCrime = new JComboBox();
         cbPesquisarCrime.setEditable(true);
@@ -76,23 +78,12 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
         contentPane.add(txtNome);
         txtNome.setColumns(10);
 
-        txtEndereco = new JTextField();
-        txtEndereco.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtEndereco.setBounds(129, 101, 365, 20);
-        contentPane.add(txtEndereco);
-        txtEndereco.setColumns(10);
+        txtIdCrime = new JTextField();
+        txtIdCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        txtIdCrime.setBounds(129, 101, 365, 20);
+        contentPane.add(txtIdCrime);
+        txtIdCrime.setColumns(10);
 
-
-
-        try {
-            txtTel = new JTextField();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        txtTel.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtTel.setBounds(129, 126, 143, 20);
-        contentPane.add(txtTel);
 
 
 
@@ -102,12 +93,12 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
         btnSalvar.setActionCommand("salvar");
         contentPane.add(btnSalvar);
 
-        btnEditar = new JButton("Editar");
-        btnEditar.setBounds(280, 327, 75, 23);
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(this);
-        btnEditar.setActionCommand("editar");
-        contentPane.add(btnEditar);
+//        btnEditar = new JButton("Editar");
+//        btnEditar.setBounds(280, 327, 75, 23);
+//        btnEditar.setText("Editar");
+//        btnEditar.addActionListener(this);
+//        btnEditar.setActionCommand("editar");
+//        contentPane.add(btnEditar);
 
         btnLimpar = new JButton("Limpar");
         btnLimpar.setBounds(360, 327, 75, 23);
@@ -129,27 +120,26 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
         btnPesquisar.setActionCommand("pesquisar");
         contentPane.add(btnPesquisar);
         txtID = "";
-        this.carregaListaCriminoso();
+        this.carregaListaCrime();
         this.carregaListaVitima();
 
     }
-    public Contato montaContato(){
+    public VitimaCrime montaVitimaCrime(){
             //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-            Contato c = new Contato();
-             c.setNome(this.txtNome.getText());
-             c.setEndereco(this.txtEndereco.getText());
-             c.setTelefone(this.txtTel.getText());
+             VitimaCrime c = new VitimaCrime();
+             c.setCrime(DbOperations_Crime.findCrimeById(Integer.parseInt(txtIdCrime.getText())));
+             c.setVitima(DbOperations_Vitima.getByName(txtNome.getText()));
              return c;
             }
-    public Contato editaContato(int i){
-        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-        Contato c = new Contato();
-        c.setId(i);
-        c.setNome(this.txtNome.getText());
-        c.setEndereco(this.txtEndereco.getText());
-        c.setTelefone(this.txtTel.getText());
-        return c;
-    }
+//    public Contato editaContato(int i){
+//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
+//        Contato c = new Contato();
+//        c.setId(i);
+//        c.setNome(this.txtNome.getText());
+//        c.setEndereco(this.txtEndereco.getText());
+//        c.setTelefone(this.txtTel.getText());
+//        return c;
+//    }
     public void carregaCriminosonaTela(Contato c2){
 //        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
 //        this.txtNome.setText(c2.getNome());
@@ -180,10 +170,10 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
 
             }
 
-    public void carregaListaCriminoso(){
+    public void carregaListaCrime(){
             //Preenche Combobox com registros do banco de dados
-            CriminosoVitimaCT mbc = new CriminosoVitimaCT();
-            List<Criminoso> CriminosoBd = mbc.getCriminosos();
+            VitimaCrime mbc = new VitimaCrime();
+            List<Crime> CrimeBd = mbc.getCrimes();
                 cbPesquisarCrime.removeAllItems();
             for (Criminoso criminoso : CriminosoBd) {
                 cbPesquisarCrime.addItem(criminoso.getId() + "-" + criminoso.getNome());

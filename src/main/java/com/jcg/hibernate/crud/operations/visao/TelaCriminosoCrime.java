@@ -1,7 +1,10 @@
 package com.jcg.hibernate.crud.operations.visao;
 
 import com.jcg.hibernate.crud.operations.*;
-import com.jcg.hibernate.crud.operations.controle.CriminosoVitimaCT;
+import com.jcg.hibernate.crud.operations.controle.*;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Crime;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso;
+import com.jcg.hibernate.crud.operations.modelo.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +16,7 @@ import java.util.List;
 public class TelaCriminosoCrime extends JFrame implements ActionListener {
 
     private JPanel contentPane;
-    private JTextField txtNomeCrime;
+    private JTextField txtIdCrime;
     private JTextField txtNomeCriminoso;
 
     private JTextField txtTel;
@@ -68,16 +71,16 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
 
        contentPane.add(cbPesquisarCriminoso);
         contentPane.add(cbPesquisarCrime);
-        txtNomeCrime = new JTextField();
-        txtNomeCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtNomeCrime.setBounds(129, 76, 283, 20);
+        txtIdCrime = new JTextField();
+        txtIdCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        txtIdCrime.setBounds(129, 76, 283, 20);
         contentPane.add(txtNomeCriminoso);
-        txtNomeCrime.setColumns(10);
+        txtIdCrime.setColumns(10);
 
         txtNomeCriminoso = new JTextField();
         txtNomeCriminoso.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
         txtNomeCriminoso.setBounds(129, 101, 365, 20);
-        contentPane.add(txtNomeCrime);
+        contentPane.add(txtIdCrime);
         txtNomeCriminoso.setColumns(10);
 
 
@@ -128,13 +131,13 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
         contentPane.add(btnPesquisar);
         txtID = "";
         this.carregaListaCriminoso();
-        this.carregaListaVitima();
+        this.carregaListaCrime();
 
     }
     public CriminosoCrime montaCriminosoCrime(){
             //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
             CriminosoCrime c = new CriminosoCrime();
-             c.setCrime(DbOperations_Crime.findCrimeById(Integer.parseInt(txtNomeCrime.getText())));
+             c.setCrime(DbOperations_Crime.findCrimeById(Integer.parseInt(txtIdCrime.getText())));
              c.setCriminoso(DbOperations_Criminoso.getByName(txtNomeCriminoso.getText()));
              return c;
             }
@@ -147,13 +150,13 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
 //        c.setTelefone(this.txtTel.getText());
 //        return c;
 //    }
-    public void carregaCriminosonaTela(Contato c2){
+    //public void carregaCriminosonaTela(Contato c2){
 //        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
 //        this.txtNome.setText(c2.getNome());
 //        this.txtEndereco.setText(c2.getEndereco());
 //        this.txtTel.setText(c2.getTelefone());
 
-    }
+    //}
     public void carregaCriminosonaTela(Criminoso criminoso){
 //        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
 //        this.txtNome.setText(c2.getNome());
@@ -179,85 +182,110 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
 
     public void carregaListaCriminoso(){
             //Preenche Combobox com registros do banco de dados
-        CriminosoCrime mbc = new CriminosoCrime();
-            List<Criminoso> CriminosoBd = (List<Criminoso>) mbc.getCriminoso();
-           cbPesquisarCriminoso.removeAllItems();
+            CriminosoCrimeCT mbc = new CriminosoCrimeCT();
+            List<Criminoso> CriminosoBd = mbc.getCriminosos();
+            cbPesquisarCriminoso.removeAllItems();
             for (Criminoso criminoso : CriminosoBd) {
-                cbPesquisarCriminoso.addItem(criminoso.getId() + "-" + criminoso.getNome());
+                cbPesquisarCriminoso.addItem(criminoso.getNome());
             }
     }
+    public void carregaListaCrime(){
+        //Preenche Combobox com registros do banco de dados
+        CriminosoCrimeCT mbc = new CriminosoCrimeCT();
+        List<Crime> CrimeBd =  mbc.getCrimes();
+        cbPesquisarCriminoso.removeAllItems();
+        for (Crime crime : CrimeBd) {
+            cbPesquisarCriminoso.addItem(crime.getId() + "-" + crime.getDescricao());
+        }
+    }
+
+    CriminosoCrimeCT criminosoCrimeCT = new CriminosoCrimeCT();
+    CriminosoCT criminosoCT = new CriminosoCT();
+    CrimeCT crimeCT = new CrimeCT();
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            if(e.getActionCommand().equals(this.btnSalvar.getActionCommand())){
-                //Condicional - se clicar no botão Salvar ...
-                 CriminosoCrime c = this.montaCriminosoCrime();
-                 //Chama o método montaContato para pegar os dados e gravar no objeto c;
-//                 controle.ContatoCT cbc;
-//                 cbc = new ContatoCT();
-                //Instancia a classe de controle ContatoCT;
-//                 cbc.insert(c);
+        if (e.getActionCommand().equals(this.btnSalvar.getActionCommand())) {
+            //Condicional - se clicar no botão Salvar ...
+            //Instancia a classe de controle ContatoCT;
+            try {
+                String nomeCriminosoDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
+                Criminoso criminoso = criminosoCT.select(nomeCriminosoDigitado);
+
+                int idCrimeDigitado = Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString().trim());
+                Crime crime = crimeCT.se
+
+                if (!criminoso.getNome().contains(nomeCriminosoDigitado))
+                    JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+
+                if (!vitima.getNome().contains(nomeVitimaDigitado))
+                    JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
+
+                criminosoVitimaCT.createCriminosoVitima(nomeCriminosoDigitado, nomeVitimaDigitado);
+
+
                 //Chama o método insert da classe ContatoCT para inserir os dados do objeto Contato (c) de montaContato no banco;
                 this.limpaTela();
                 //Limpa os campos após inserir/salvar dados no banco;
                 this.carregaListaCriminoso();
-
-               //Carrega a lista do combobox, atualizando após inserção;
-                JOptionPane.showMessageDialog(null, "Contato "+txtNome.getText()+" cadastrado...");
-               //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
-              } else
-            if(e.getActionCommand().equals(this.btnPesquisar.getActionCommand())){
-                //Condicional - se clicar no botão buscar ...
-                CriminosoVitimaCT criminosoVitimaCT = new CriminosoVitimaCT();
-                this.carregaListaCriminoso();
-                
+                this.carregaListaVitima();
+                //Carrega a lista do combobox, atualizando após inserção;
+                JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e" + nomeVitimaDigitado +"cadastrada...");
+                //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado À vitima...");
+            }
+        } else if (e.getActionCommand().equals(this.btnPesquisarCriminosoVitima.getActionCommand())) {
+            //Condicional - se clicar no botão buscar ...
+            try {
                 //Instancia a classe de controle ContatoCT;
-                 String nomeDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
-                 Criminoso cbusca = criminosoVitimaCT.select(nomeDigitado);
-                if  (cbusca.getNome().equals(nomeDigitado))
-                { JOptionPane.showMessageDialog(null, "Criminoso encontrado!");
-                    this.carregaCriminosonaTela(new Criminoso());}
-                else
-                {      JOptionPane.showMessageDialog(null, "Contato nao cadastrado...");
+                String nomeCriminosoDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
+                Criminoso cbusca = criminosoCT.select(nomeCriminosoDigitado);
+
+                String nomeVitimaDigitado = cbPesquisarVitima.getSelectedItem().toString().trim();
+                Vitima vbusca = vitimaCT.select(nomeVitimaDigitado);
+
+                CriminosoVitima cv = criminosoVitimaCT.select(cbusca, vbusca);
+
+
+                if (!cbusca.getNome().contains(nomeCriminosoDigitado)) {
+
+                    JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
 
                 }
-            } else
-            if(e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
-              this.limpaTela();
-            } else
-            if(e.getActionCommand().equals(this.btnExcluir.getActionCommand())){
-                //Condicional - se clicar no botão buscar ...
-//                controle.ContatoCT cbc = new ContatoCT();
-                //Instancia a classe de controle ContatoCT;
+                if (!vbusca.getNome().contains(nomeVitimaDigitado)) {
 
-//                Contato cbusca = cbc.select(cbPesquisarCriminoso.getSelectedItem().toString());
-//                if  (cbusca==null)
-//                    JOptionPane.showMessageDialog(null, "Contato nao cadastrado...");
-//                else
-//
-//                { JOptionPane.showMessageDialog(null, "Contato excluido!");
-//                    this.carregaContatonaTela(cbusca);
-//                    cbc.delete(cbusca);
-//                    this.limpaTela();
-//                    this.carregaLista();
-//                }
-//            }
-//        if(e.getActionCommand().equals(this.btnEditar.getActionCommand())){
-//            //Condicional - se clicar no botão buscar ...
-//            controle.ContatoCT cbc = new ContatoCT();
-//            //Instancia a classe de controle ContatoCT;
-//
-//            Contato cbusca = cbc.select(cbPesquisarCriminoso.getSelectedItem().toString());
-//            if  (cbusca==null)
-//                JOptionPane.showMessageDialog(null, "Contato nao cadastrado...");
-//            else
-//
-//            { JOptionPane.showMessageDialog(null, "Contato editado!");
-//
-//                cbc.update(this.editaContato(cbusca.getId()));
-//                this.limpaTela();
-//                this.carregaLista();
-//            }
+                    JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
+                }
+                if (cv.getCriminoso() != null && cv.getVitima() != null) {
+                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + cbusca.getNome() + "cometeu um crime cuja vítima foi " + vbusca.getNome());
+                } else {
+                    JOptionPane.showMessageDialog(null, "Associação não encontrada...");
+                }
+
+                this.carregaListaCriminoso();
+                this.carregaListaVitima();
+            }catch (Exception ex){
+                JOptionPane.showMessageDialog(null, "Algo deu errado... - não há associação! ");
+            }
+        } else if (e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
+            this.limpaTela();
+        } else if (e.getActionCommand().equals(this.btnExcluir.getActionCommand())) {
+
+
+            Vitima vitima = vitimaCT.select(cbPesquisarVitima.getSelectedItem().toString());
+            Criminoso criminoso = criminosoCT.select(cbPesquisarCriminoso.getSelectedItem().toString());
+            if (criminoso == null  || vitima == null)
+                JOptionPane.showMessageDialog(null, "Vitima e/ou criminoso nao cadastrados...");
+            else {
+                JOptionPane.showMessageDialog(null, "Relação excluida!");
+                criminosoVitimaCT.delete(cbPesquisarCriminoso.getSelectedItem().toString(), cbPesquisarVitima.getSelectedItem().toString());
+                this.limpaTela();
+                this.carregaListaCriminoso();
+                this.carregaListaVitima();
+            }
+
         }
 
 
