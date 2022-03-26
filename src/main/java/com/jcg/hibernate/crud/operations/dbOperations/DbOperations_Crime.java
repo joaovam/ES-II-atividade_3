@@ -1,6 +1,7 @@
 package com.jcg.hibernate.crud.operations.dbOperations;
 
 import com.jcg.hibernate.crud.operations.modelo.Crime;
+import com.jcg.hibernate.crud.operations.modelo.Crime;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -94,7 +95,12 @@ public class DbOperations_Crime {
 
 			// Creating Transaction Entity
 			Crime crimeObj = (Crime) sessionObj.get(Crime.class, crime.getId());
-			crimeObj = crime;
+			crimeObj.setTipo(crime.getTipo());
+			crimeObj.setDescricao(crime.getDescricao());
+			crimeObj.setData(crime.getData());
+			crimeObj.setLocal(crime.getLocal());
+			crimeObj.setVisto(crime.isVisto());
+
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
 			System.out.println("\nCrime With Id?= " + crime.getId() + " Is Successfully Updated In The Database!\n");
@@ -183,5 +189,26 @@ public class DbOperations_Crime {
 				sessionObj.close();
 			}
 		}
+	}
+
+	public static Crime getByDescricao(String descricaoDigitada) {
+		Crime findCrimeObj = null;
+		try {
+			// Getting Session Object From SessionFactory
+			sessionObj = buildSessionFactory().openSession();
+			// Getting Transaction Object From Session Object
+			sessionObj.beginTransaction();
+
+			findCrimeObj = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", descricaoDigitada).uniqueResult();
+
+
+		} catch (Exception sqlException) {
+			if (null != sessionObj.getTransaction()) {
+				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
+				sessionObj.getTransaction().rollback();
+			}
+			sqlException.printStackTrace();
+		}
+		return findCrimeObj;
 	}
 }

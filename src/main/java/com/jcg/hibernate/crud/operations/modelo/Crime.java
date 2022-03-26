@@ -40,6 +40,7 @@ public class Crime implements Serializable {
 	private List<ArmaCrime> armaCrimes;
 
 
+
 	public int getId() {
 		return id;
 	}
