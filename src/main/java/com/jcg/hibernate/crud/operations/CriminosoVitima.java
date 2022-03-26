@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "CRIMINOSO_VITIMA_689386_698159")
 public class CriminosoVitima {
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="criminoso_id")
     private Criminoso criminoso;
 

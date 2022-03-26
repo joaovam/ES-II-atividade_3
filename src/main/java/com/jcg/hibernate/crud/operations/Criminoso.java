@@ -27,10 +27,10 @@ public class Criminoso implements Serializable {
 	@Column(name="cpf")
 	private String cpf;
 
-	@OneToMany(mappedBy = "criminoso")
+	@OneToMany(mappedBy = "criminoso", cascade = CascadeType.MERGE)
 	private List<CriminosoCrime> criminosoCrimes;
 
-	@OneToMany(mappedBy = "criminoso")
+	@OneToMany(mappedBy = "criminoso", cascade = CascadeType.MERGE)
 	private List<CriminosoVitima> criminosoVitimas;
 
 	public Criminoso() {
