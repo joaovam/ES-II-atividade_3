@@ -1,12 +1,12 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.modelo;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name="CRIMINOSO_689386_698159")
-public class Criminoso implements Serializable {
+@Table(name="VITIMA_689386_698159")
+public class Vitima implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -27,16 +27,17 @@ public class Criminoso implements Serializable {
 	@Column(name="cpf")
 	private String cpf;
 
-	@OneToMany(mappedBy = "criminoso")
-	private List<CriminosoCrime> criminosoCrimes;
+	@OneToMany(mappedBy = "vitima" , cascade = CascadeType.MERGE)
+	private List<CriminosoVitima> criminosoVitima;
 
-	@OneToMany(mappedBy = "criminoso")
-	private List<CriminosoVitima> criminosoVitimas;
+	@OneToMany(mappedBy = "vitima", cascade = CascadeType.MERGE)
+	private List<VitimaCrime> vitimaCrimes;
 
-	public Criminoso() {
+
+	public Vitima() {
 	}
 
-	public Criminoso(int id, String nome, String genero, int idade, String cpf) {
+	public Vitima(int id, String nome, String genero, int idade, String cpf) {
 		this.id = id;
 		this.nome = nome;
 		this.genero = genero;

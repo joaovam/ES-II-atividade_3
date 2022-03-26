@@ -1,7 +1,7 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.Contato;
-import com.jcg.hibernate.crud.operations.Crime;
+import com.jcg.hibernate.crud.operations.modelo.Contato;
+import com.jcg.hibernate.crud.operations.modelo.Crime;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

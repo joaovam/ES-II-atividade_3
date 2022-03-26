@@ -1,7 +1,8 @@
 package com.jcg.hibernate.crud.operations.controle;
 
 
-import com.jcg.hibernate.crud.operations.*;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Vitima;
+import com.jcg.hibernate.crud.operations.modelo.Vitima;
 
 import java.util.List;
 

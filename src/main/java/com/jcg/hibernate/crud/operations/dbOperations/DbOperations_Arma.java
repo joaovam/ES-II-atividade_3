@@ -1,5 +1,6 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.dbOperations;
 
+import com.jcg.hibernate.crud.operations.modelo.Arma;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

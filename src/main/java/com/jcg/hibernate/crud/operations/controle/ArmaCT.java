@@ -1,7 +1,8 @@
 package com.jcg.hibernate.crud.operations.controle;
 
 
-import com.jcg.hibernate.crud.operations.*;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Arma;
+import com.jcg.hibernate.crud.operations.modelo.Arma;
 
 import java.util.List;
 

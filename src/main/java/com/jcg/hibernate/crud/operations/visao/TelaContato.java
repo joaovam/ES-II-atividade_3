@@ -1,6 +1,6 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.Contato;
+import com.jcg.hibernate.crud.operations.modelo.Contato;
 //import controle.ContatoCT;
 
 import javax.swing.*;
@@ -245,7 +245,7 @@ public class TelaContato extends JFrame implements ActionListener {
 
 
     }
-    
 
-    
+
+
 }

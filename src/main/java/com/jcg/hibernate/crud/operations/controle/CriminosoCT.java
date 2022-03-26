@@ -1,5 +1,10 @@
 package com.jcg.hibernate.crud.operations.controle;
-import com.jcg.hibernate.crud.operations.*;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso_Vitima;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Vitima;
+import com.jcg.hibernate.crud.operations.modelo.Criminoso;
+import com.jcg.hibernate.crud.operations.modelo.Vitima;
+
 import java.util.List;
 
 
@@ -18,9 +23,9 @@ public class CriminosoCT {
         return criminosos;
     }
 
-    public void createCriminosoVitima(Criminoso criminoso, Vitima vitima){
-        CriminosoVitima criminosoVitima = new CriminosoVitima(criminoso, vitima);
-        DbOperations_Criminoso_Vitima.createCriminosoVitima(criminosoVitima);
+    public void createCriminosoVitima(String  nomeCriminoso, String nomeVitima){
+
+        DbOperations_Criminoso_Vitima.createCriminosoVitima(nomeCriminoso, nomeVitima);
     }
 
     public Criminoso select(String nomeDigitado) {

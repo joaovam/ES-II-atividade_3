@@ -1,10 +1,7 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.Arma;
-import com.jcg.hibernate.crud.operations.Contato;
-import com.jcg.hibernate.crud.operations.Vitima;
+import com.jcg.hibernate.crud.operations.modelo.Arma;
 import com.jcg.hibernate.crud.operations.controle.ArmaCT;
-import com.jcg.hibernate.crud.operations.controle.CriminosoVitimaCT;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

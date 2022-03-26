@@ -1,6 +1,7 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.modelo;
+import com.jcg.hibernate.crud.operations.modelo.idsCompostos.ArmaCrimeId;
+
 import javax.persistence.*;
-import java.util.Objects;
 import java.io.Serializable;
 
 @Entity
