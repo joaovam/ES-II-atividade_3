@@ -1,8 +1,5 @@
 package com.jcg.hibernate.crud.operations.controle;
-
-
 import com.jcg.hibernate.crud.operations.*;
-
 import java.util.List;
 
 
@@ -38,4 +35,5 @@ public class CriminosoCT {
     public void update(Criminoso criminoso) {
         DbOperations_Criminoso.updateRecord(criminoso);
     }
+
 }
