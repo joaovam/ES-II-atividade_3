@@ -1,5 +1,9 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.dbOperations;
 
+import com.jcg.hibernate.crud.operations.modelo.Criminoso;
+import com.jcg.hibernate.crud.operations.modelo.CriminosoVitima;
+import com.jcg.hibernate.crud.operations.modelo.idsCompostos.CriminosoVitimaId;
+import com.jcg.hibernate.crud.operations.modelo.Vitima;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;

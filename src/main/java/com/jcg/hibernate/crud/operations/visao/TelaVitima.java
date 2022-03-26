@@ -1,6 +1,6 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.Vitima;
+import com.jcg.hibernate.crud.operations.modelo.Vitima;
 import com.jcg.hibernate.crud.operations.controle.VitimaCT;
 
 import javax.swing.*;

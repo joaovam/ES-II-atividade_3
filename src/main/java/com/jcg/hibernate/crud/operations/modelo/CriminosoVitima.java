@@ -1,4 +1,6 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.modelo;
+
+import com.jcg.hibernate.crud.operations.modelo.idsCompostos.CriminosoVitimaId;
 
 import javax.persistence.*;
 

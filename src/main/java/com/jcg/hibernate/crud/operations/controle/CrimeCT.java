@@ -1,8 +1,8 @@
 package com.jcg.hibernate.crud.operations.controle;
 
 
-import com.jcg.hibernate.crud.operations.Crime;
-import com.jcg.hibernate.crud.operations.DbOperations;
+import com.jcg.hibernate.crud.operations.modelo.Crime;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations;
 
 
 public class CrimeCT {

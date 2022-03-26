@@ -1,19 +1,19 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.modelo.idsCompostos;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-public class CriminosoVitimaId implements Serializable {
+public class CriminosoCrimeId implements Serializable {
 
     private int criminoso;
-    private int vitima;
+    private int crime;
 
-    public CriminosoVitimaId() {
+    public CriminosoCrimeId() {
     }
 
-    public CriminosoVitimaId(int criminoso, int vitima) {
+    public CriminosoCrimeId(int criminoso, int crime) {
         this.criminoso = criminoso;
-        this.vitima = vitima;
+        this.crime = crime;
     }
 
     public int getCriminoso() {
@@ -25,23 +25,23 @@ public class CriminosoVitimaId implements Serializable {
     }
 
     public int getCrime() {
-        return vitima;
+        return crime;
     }
 
-    public void setCrime(int vitima) {
-        this.vitima = vitima;
+    public void setCrime(int crime) {
+        this.crime = crime;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CriminosoVitimaId that = (CriminosoVitimaId) o;
-        return criminoso == that.criminoso && vitima == that.vitima;
+        CriminosoCrimeId that = (CriminosoCrimeId) o;
+        return criminoso == that.criminoso && crime == that.crime;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(criminoso, vitima);
+        return Objects.hash(criminoso, crime);
     }
 }

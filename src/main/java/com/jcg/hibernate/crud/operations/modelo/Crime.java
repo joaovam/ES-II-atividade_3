@@ -1,6 +1,4 @@
-package com.jcg.hibernate.crud.operations;
-
-import jdk.dynalink.linker.LinkerServices;
+package com.jcg.hibernate.crud.operations.modelo;
 
 import javax.persistence.*;
 import java.io.Serializable;

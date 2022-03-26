@@ -1,5 +1,6 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.dbOperations;
 
+import com.jcg.hibernate.crud.operations.modelo.Crime;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,11 +12,11 @@ import org.jboss.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DbOperations_Arma {
+public class DbOperations_Crime {
 
 	static Session sessionObj;
 	static SessionFactory sessionFactoryObj;
-	public final static Logger logger = Logger.getLogger(DbOperations_Arma.class);
+	public final static Logger logger = Logger.getLogger(DbOperations_Crime.class);
 
 	// This Method Is Used To Create The Hibernate's SessionFactory Object
 	private static SessionFactory buildSessionFactory() {
@@ -31,22 +32,19 @@ public class DbOperations_Arma {
 		return sessionFactoryObj;
 	}
 
-	// Method 1: This Method Used To Create A New Student Record In The Database Table
-	public static void createRecord(Arma armaObj) {
+	// Method 1: This Method Used To Create A New crime Record In The Database Table
+	public static void createCrime(Crime crime) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
-
 			// Creating Transaction Entities
-
-				sessionObj.save(armaObj);
-
-
+				sessionObj.save(crime);
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
-			System.out.println("\nSuccessfully Created '" + armaObj.getId() + "' Records In The Database!\n");
+
+			System.out.println("\nSuccessfully Created '" + crime.getId() + "' Records In The Database!\n");
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -63,15 +61,15 @@ public class DbOperations_Arma {
 
 	// Method 2: This Method Is Used To Display The Records From The Database Table
 	@SuppressWarnings("unchecked")
-	public static List<Arma> displayRecords() {
-		List<Arma> armaList = new ArrayList<Arma>();
+	public static List<Crime> displayCrimes() {
+		List<Crime> crimeList = new ArrayList<Crime>();
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			armaList = sessionObj.createQuery("FROM Arma").list();
+			crimeList = sessionObj.createQuery("FROM Crime").list();
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -83,11 +81,11 @@ public class DbOperations_Arma {
 				sessionObj.close();
 			}
 		}
-		return armaList;
+		return crimeList;
 	}
 
 	// Method 3: This Method Is Used To Update A Record In The Database Table	
-	public static void updateRecord(Arma arma) {
+	public static void updateCrime(Crime crime) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
@@ -95,13 +93,11 @@ public class DbOperations_Arma {
 			sessionObj.beginTransaction();
 
 			// Creating Transaction Entity
-			Arma armaObj = (Arma) sessionObj.get(Arma.class, arma.getId());
-			armaObj = arma;
-
-
+			Crime crimeObj = (Crime) sessionObj.get(Crime.class, crime.getId());
+			crimeObj = crime;
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
-			System.out.println("\nContato With Id?= " + arma.getId() + " Is Successfully Updated In The Database!\n");
+			System.out.println("\nCrime With Id?= " + crime.getId() + " Is Successfully Updated In The Database!\n");
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -116,19 +112,19 @@ public class DbOperations_Arma {
 	}
 
 	// Method 4(a): This Method Is Used To Delete A Particular Record From The Database Table
-	public static void deleteRecord(Integer id) {
+	public static void deleteCrime(Integer id) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			Arma armaObj = findRecordById(id);
-			sessionObj.delete(armaObj);
+			Crime crimeObj = findCrimeById(id);
+			sessionObj.delete(crimeObj);
 
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
-			System.out.println("\narma With Id?= " + id + " Is Successfully Deleted From The Database!\n");
+			System.out.println("\ncrime With Id?= " + id + " Is Successfully Deleted From The Database!\n");
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -143,15 +139,15 @@ public class DbOperations_Arma {
 	}
 
 	// Method 4(b): This Method To Find Particular Record In The Database Table
-	public static Arma findRecordById(Integer id) {
-		Arma findarmaObj = null;
+	public static Crime findCrimeById(Integer id) {
+		Crime findCrimeObj = null;
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			findarmaObj = (Arma) sessionObj.load(Arma.class, id);
+			findCrimeObj = (Crime) sessionObj.load(Crime.class, id);
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -159,18 +155,18 @@ public class DbOperations_Arma {
 			}
 			sqlException.printStackTrace();
 		} 
-		return findarmaObj;
+		return findCrimeObj;
 	}
 
 	// Method 5: This Method Is Used To Delete All Records From The Database Table
-	public static void deleteAllRecords() {
+	public static void deleteAllCrimes() {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			Query queryObj = sessionObj.createQuery("DELETE FROM Arma");
+			Query queryObj = sessionObj.createQuery("DELETE FROM Crime");
 			queryObj.executeUpdate();
 
 			// Committing The Transactions To The Database

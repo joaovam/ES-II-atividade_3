@@ -1,8 +1,8 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.Criminoso;
-import com.jcg.hibernate.crud.operations.CriminosoVitima;
-import com.jcg.hibernate.crud.operations.Vitima;
+import com.jcg.hibernate.crud.operations.modelo.Criminoso;
+import com.jcg.hibernate.crud.operations.modelo.CriminosoVitima;
+import com.jcg.hibernate.crud.operations.modelo.Vitima;
 import com.jcg.hibernate.crud.operations.controle.CriminosoCT;
 import com.jcg.hibernate.crud.operations.controle.CriminosoVitimaCT;
 import com.jcg.hibernate.crud.operations.controle.VitimaCT;

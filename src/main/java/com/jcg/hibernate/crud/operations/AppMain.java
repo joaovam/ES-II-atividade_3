@@ -1,5 +1,8 @@
 package com.jcg.hibernate.crud.operations;
 
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations;
+import com.jcg.hibernate.crud.operations.modelo.Contato;
+
 import java.util.List;
 
 

@@ -1,4 +1,4 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.modelo;
 
 import javax.persistence.*;
 import java.io.Serializable;

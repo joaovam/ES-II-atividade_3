@@ -1,4 +1,4 @@
-package com.jcg.hibernate.crud.operations;
+package com.jcg.hibernate.crud.operations.modelo.idsCompostos;
 import java.io.Serializable;
 import java.util.Objects;
 public class VitimaCrimeId implements Serializable {
