@@ -39,7 +39,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
     private JButton btnLimpar;
 
     public TelaVitimaCrime() {
-        setTitle("Associação de criminoso e vitima");
+        setTitle("Associação de crime e vitima");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 800, 513);
         contentPane = new JPanel();

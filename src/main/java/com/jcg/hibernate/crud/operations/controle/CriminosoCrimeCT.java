@@ -5,9 +5,8 @@ import com.jcg.hibernate.crud.operations.*;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Crime;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso_Crime;
-import com.jcg.hibernate.crud.operations.modelo.Crime;
-import com.jcg.hibernate.crud.operations.modelo.Criminoso;
-import com.jcg.hibernate.crud.operations.modelo.CriminosoCrime;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso_Vitima;
+import com.jcg.hibernate.crud.operations.modelo.*;
 
 import java.util.List;
 
@@ -27,7 +26,11 @@ public class CriminosoCrimeCT {
         DbOperations_Criminoso_Crime.createCriminosoCrime(criminosoCrime);
     }
 
-    public Criminoso select(String nomeDigitado) {
-        return DbOperations_Criminoso.getByName(nomeDigitado);
+    public CriminosoCrime select(Criminoso criminoso, Crime crime) {
+        return DbOperations_Criminoso_Crime.findRecordById(criminoso, crime);
+    }
+    public void delete(String nomeCriminoso, int idCrime) {
+        DbOperations_Criminoso_Crime.deleteCriminosoCrime(nomeCriminoso, idCrime);
+
     }
 }

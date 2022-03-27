@@ -19,7 +19,7 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
     private JTextField txtIdCrime;
     private JTextField txtNomeCriminoso;
 
-    private JTextField txtTel;
+
     private String txtID;
     private JComboBox<String> cbPesquisarCriminoso;
     private JComboBox<String> cbPesquisarCrime;
@@ -51,15 +51,12 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
         lblNome.setBounds(10, 79, 109, 14);
         contentPane.add(lblNome);
 
-        JLabel lblEndereo = new JLabel("id do crime:");
-        lblEndereo.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblEndereo.setBounds(10, 104, 109, 14);
-        contentPane.add(lblEndereo);
+        JLabel lblid = new JLabel("id do crime:");
+        lblid.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+        lblid.setBounds(10, 104, 109, 14);
+        contentPane.add(lblid);
 
-        JLabel lblTel = new JLabel("Telefone:");
-        lblTel.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblTel.setBounds(10, 129, 109, 14);
-        contentPane.add(lblTel);
+
 
         cbPesquisarCriminoso = new JComboBox<>();
         cbPesquisarCriminoso.setEditable(true);
@@ -84,31 +81,11 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
         txtNomeCriminoso.setColumns(10);
 
 
-
-        try {
-            txtTel = new JTextField();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        txtTel.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        txtTel.setBounds(129, 126, 143, 20);
-        contentPane.add(txtTel);
-
-
-
         btnSalvar = new JButton("Incluir");
         btnSalvar.setBounds(193, 327, 75, 23);
         btnSalvar.addActionListener(this);
         btnSalvar.setActionCommand("salvar");
         contentPane.add(btnSalvar);
-
-        btnEditar = new JButton("Editar");
-        btnEditar.setBounds(280, 327, 75, 23);
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(this);
-        btnEditar.setActionCommand("editar");
-        contentPane.add(btnEditar);
 
         btnLimpar = new JButton("Limpar");
         btnLimpar.setBounds(360, 327, 75, 23);
@@ -219,34 +196,35 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
                 if (!criminoso.getNome().contains(nomeCriminosoDigitado))
                     JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
 
-                if (!vitima.getNome().contains(nomeVitimaDigitado))
-                    JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
+                if (crime.getId()!=idCrimeDigitado)
+                    JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
 
-                criminosoVitimaCT.createCriminosoVitima(nomeCriminosoDigitado, nomeVitimaDigitado);
+                criminosoCrimeCT.createCriminosoCrime(criminoso,crime);
+
 
 
                 //Chama o método insert da classe ContatoCT para inserir os dados do objeto Contato (c) de montaContato no banco;
                 this.limpaTela();
                 //Limpa os campos após inserir/salvar dados no banco;
                 this.carregaListaCriminoso();
-                this.carregaListaVitima();
+                this.carregaListaCrime();
                 //Carrega a lista do combobox, atualizando após inserção;
-                JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e" + nomeVitimaDigitado +"cadastrada...");
+                JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e" + idCrimeDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado À vitima...");
             }
-        } else if (e.getActionCommand().equals(this.btnPesquisarCriminosoVitima.getActionCommand())) {
+        } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
             try {
                 //Instancia a classe de controle ContatoCT;
                 String nomeCriminosoDigitado = cbPesquisarCriminoso.getSelectedItem().toString().trim();
                 Criminoso cbusca = criminosoCT.select(nomeCriminosoDigitado);
 
-                String nomeVitimaDigitado = cbPesquisarVitima.getSelectedItem().toString().trim();
-                Vitima vbusca = vitimaCT.select(nomeVitimaDigitado);
+                int idCrime = Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString().trim());
+                Crime crime = crimeCT.select(idCrime);
 
-                CriminosoVitima cv = criminosoVitimaCT.select(cbusca, vbusca);
+                CriminosoCrime cv = criminosoCrimeCT.select(cbusca, crime);
 
 
                 if (!cbusca.getNome().contains(nomeCriminosoDigitado)) {
@@ -254,18 +232,18 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
 
                 }
-                if (!vbusca.getNome().contains(nomeVitimaDigitado)) {
+                if (crime.getId()!=idCrime) {
 
-                    JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
+                    JOptionPane.showMessageDialog(null, "Crime nao cadastrada...");
                 }
-                if (cv.getCriminoso() != null && cv.getVitima() != null) {
-                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + cbusca.getNome() + "cometeu um crime cuja vítima foi " + vbusca.getNome());
+                if (cv.getCriminoso() != null && cv.getCrime() != null) {
+                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + cbusca.getNome() + "cometeu um crime cuja descrição foi " + crime.getDescricao());
                 } else {
                     JOptionPane.showMessageDialog(null, "Associação não encontrada...");
                 }
 
                 this.carregaListaCriminoso();
-                this.carregaListaVitima();
+                this.carregaListaCrime();
             }catch (Exception ex){
                 JOptionPane.showMessageDialog(null, "Algo deu errado... - não há associação! ");
             }
@@ -274,16 +252,17 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
         } else if (e.getActionCommand().equals(this.btnExcluir.getActionCommand())) {
 
 
-            Vitima vitima = vitimaCT.select(cbPesquisarVitima.getSelectedItem().toString());
+            Crime crime = crimeCT.select(cbPesquisarCrime.getSelectedItem().toString());
             Criminoso criminoso = criminosoCT.select(cbPesquisarCriminoso.getSelectedItem().toString());
-            if (criminoso == null  || vitima == null)
-                JOptionPane.showMessageDialog(null, "Vitima e/ou criminoso nao cadastrados...");
+            if (criminoso == null  || crime == null)
+                JOptionPane.showMessageDialog(null, "Crime e/ou criminoso nao cadastrados...");
             else {
                 JOptionPane.showMessageDialog(null, "Relação excluida!");
-                criminosoVitimaCT.delete(cbPesquisarCriminoso.getSelectedItem().toString(), cbPesquisarVitima.getSelectedItem().toString());
+                criminosoCrimeCT.delete(cbPesquisarCriminoso.getSelectedItem().toString(), Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString()));
+
                 this.limpaTela();
                 this.carregaListaCriminoso();
-                this.carregaListaVitima();
+                this.carregaListaCrime();
             }
 
         }
