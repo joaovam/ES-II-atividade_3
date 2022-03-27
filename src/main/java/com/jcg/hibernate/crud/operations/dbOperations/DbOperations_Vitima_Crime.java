@@ -1,7 +1,8 @@
 package com.jcg.hibernate.crud.operations.dbOperations;
 
-import com.jcg.hibernate.crud.operations.modelo.VitimaCrime;
+import com.jcg.hibernate.crud.operations.modelo.*;
 import com.jcg.hibernate.crud.operations.modelo.idsCompostos.VitimaCrimeId;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -119,50 +120,56 @@ public class DbOperations_Vitima_Crime {
 	}
 
 	// Method 4(a): This Method Is Used To Delete A Particular Record From The Database Table
-	public static void deleteVitimaCrime(VitimaCrimeId id) {
+	public static void deleteVitimaCrime(int idCrime,String nomeVitima) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			VitimaCrime vitimaCrimeObj = findRecordById(id);
-			sessionObj.delete(vitimaCrimeObj);
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where id = :id").setParameter("id", idCrime).uniqueResult();
+			Vitima vitima = (Vitima) sessionObj.createQuery("from Vitima where nome = :nome").setParameter("nome", nomeVitima).uniqueResult();
+			VitimaCrime vitimaCrimeOBJ = new VitimaCrime(crime, vitima);
+			sessionObj.delete(vitimaCrimeOBJ);
 
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
-			System.out.println("\nvitimaCrime With Id?= " + id + " Is Successfully Deleted From The Database!\n");
-		} catch(Exception sqlException) {
-			if(null != sessionObj.getTransaction()) {
+			System.out.println("\nCrimeVitima With Id?= " + crime.getId() + ", " + vitima.getId() + " Is Successfully Deleted From The Database!\n");
+		} catch (Exception sqlException) {
+			if (null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
 				sessionObj.getTransaction().rollback();
 			}
 			sqlException.printStackTrace();
 		} finally {
-			if(sessionObj != null) {
+			if (sessionObj != null) {
 				sessionObj.close();
 			}
 		}
 	}
 
 	// Method 4(b): This Method To Find Particular Record In The Database Table
-	public static VitimaCrime findRecordById(VitimaCrimeId id) {
-		VitimaCrime findvitimaCrimeObj = null;
+	public static VitimaCrime findRecordById(Crime crime, Vitima vitima) {
+		VitimaCrime findCrimeVitima = null;
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
-
-			findvitimaCrimeObj = (VitimaCrime) sessionObj.load(VitimaCrime.class, (Serializable) id);
-		} catch(Exception sqlException) {
-			if(null != sessionObj.getTransaction()) {
+			//ArmaCrime armaCrimeObj = (ArmaCrime) sessionObj.get( ArmaCrime.class,(new ArmaCrimeId(armaCrime.getArma().getId(),armaCrime.getCrime().getId())));
+			findCrimeVitima = (VitimaCrime) sessionObj.load(VitimaCrime.class, (new VitimaCrimeId(crime.getId(), vitima.getId())));
+		} catch ( ObjectNotFoundException notFoundException){
+			return null;
+		} catch (Exception sqlException) {
+			if (null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
 				sessionObj.getTransaction().rollback();
+				return null;
 			}
 			sqlException.printStackTrace();
-		} 
-		return findvitimaCrimeObj;
+			return null;
+		}
+		return findCrimeVitima;
 	}
 
 	// Method 5: This Method Is Used To Delete All Records From The Database Table

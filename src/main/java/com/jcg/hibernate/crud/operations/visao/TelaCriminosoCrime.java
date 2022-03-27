@@ -214,7 +214,7 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
                 Criminoso criminoso = criminosoCT.select(nomeCriminosoDigitado);
 
                 int idCrimeDigitado = Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString().trim());
-                Crime crime = crimeCT.se
+                Crime crime = crimeCT.select(idCrimeDigitado);
 
                 if (!criminoso.getNome().contains(nomeCriminosoDigitado))
                     JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
