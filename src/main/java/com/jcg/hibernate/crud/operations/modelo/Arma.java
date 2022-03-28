@@ -25,6 +25,9 @@ public class Arma implements Serializable {
     }
 
     public Arma(int i, String tipo, String nome) {
+        this.id = i;
+        this.tipo = tipo;
+        this.nome = nome;
     }
 
     public int getId() {

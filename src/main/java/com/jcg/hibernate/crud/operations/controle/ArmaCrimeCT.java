@@ -2,6 +2,11 @@ package com.jcg.hibernate.crud.operations.controle;
 
 
 import com.jcg.hibernate.crud.operations.*;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Arma;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Arma_Crime;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Crime;
+import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso_Vitima;
+import com.jcg.hibernate.crud.operations.modelo.*;
 
 import java.util.List;
 
@@ -21,7 +26,11 @@ public class ArmaCrimeCT {
         DbOperations_Arma_Crime.createRecord(armaCrime);
     }
 
-    public Arma select(String nomeDigitado) {
-        return DbOperations_Arma.getByName(nomeDigitado);
+    public ArmaCrime select(Arma arma, Crime crime) {
+        return DbOperations_Arma_Crime.findRecordById(crime,arma);
+    }
+
+    public void delete(String armaNome, int idCrime) {
+        DbOperations_Arma_Crime.deleteRecord(armaNome,idCrime);
     }
 }
