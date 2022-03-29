@@ -111,36 +111,6 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
         this.carregaListaCrime();
 
     }
-    public CriminosoCrime montaCriminosoCrime(){
-            //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-            CriminosoCrime c = new CriminosoCrime();
-             c.setCrime(DbOperations_Crime.findCrimeById(Integer.parseInt(txtIdCrime.getText())));
-             c.setCriminoso(DbOperations_Criminoso.getByName(txtNomeCriminoso.getText()));
-             return c;
-            }
-//    public Contato editaContato(int i){
-//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-//        Contato c = new Contato();
-//        c.setId(i);
-//        c.setNome(this.txtNome.getText());
-//        c.setEndereco(this.txtEndereco.getText());
-//        c.setTelefone(this.txtTel.getText());
-//        return c;
-//    }
-    //public void carregaCriminosonaTela(Contato c2){
-//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-//        this.txtNome.setText(c2.getNome());
-//        this.txtEndereco.setText(c2.getEndereco());
-//        this.txtTel.setText(c2.getTelefone());
-
-    //}
-    public void carregaCriminosonaTela(Criminoso criminoso){
-//        //Pega os dados digitados nos campos do formulário e atribui ao objeto da classe Contato;
-//        this.txtNome.setText(c2.getNome());
-//        this.txtEndereco.setText(c2.getEndereco());
-//        this.txtTel.setText(c2.getTelefone());
-
-    }
 
     public void limpaTela(){
               for(int i = 0; i < contentPane.getComponentCount(); i++){
