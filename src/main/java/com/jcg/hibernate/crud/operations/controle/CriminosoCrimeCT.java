@@ -27,7 +27,7 @@ public class CriminosoCrimeCT {
     public CriminosoCrime select(Criminoso criminoso, Crime crime) {
         return DbOperations_Criminoso_Crime.findRecordById(criminoso, crime);
     }
-    public void delete(String nomeCriminoso, int idCrime) {
+    public void delete(String nomeCriminoso, String idCrime) {
         DbOperations_Criminoso_Crime.deleteCriminosoCrime(nomeCriminoso, idCrime);
 
     }

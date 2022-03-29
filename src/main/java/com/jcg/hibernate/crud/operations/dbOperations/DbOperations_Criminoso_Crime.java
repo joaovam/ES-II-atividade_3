@@ -42,9 +42,10 @@ public class DbOperations_Criminoso_Crime {
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
-
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", criminosoCrimeObj.getCrime().getDescricao()).uniqueResult();
+			Criminoso criminoso = (Criminoso) sessionObj.createQuery("from Criminoso where nome = :nome").setParameter("nome", criminosoCrimeObj.getCriminoso().getNome()).uniqueResult();
 			// Creating Transaction Entities
-
+			criminosoCrimeObj = new CriminosoCrime(criminoso,crime);
 			sessionObj.save(criminosoCrimeObj);
 
 
@@ -120,7 +121,7 @@ public class DbOperations_Criminoso_Crime {
 	}
 
 	// Method 4(a): This Method Is Used To Delete A Particular Record From The Database Table
-	public static void deleteCriminosoCrime(String nomeCriminoso,int idCrime) {
+	public static void deleteCriminosoCrime(String nomeCriminoso,String idCrime) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
@@ -128,7 +129,7 @@ public class DbOperations_Criminoso_Crime {
 			sessionObj.beginTransaction();
 
 			Criminoso criminoso = (Criminoso) sessionObj.createQuery("from Criminoso where nome = :nome").setParameter("nome", nomeCriminoso).uniqueResult();
-			Crime crime = (Crime) sessionObj.createQuery("from Crime where id = :id").setParameter("id", idCrime).uniqueResult();
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", idCrime).uniqueResult();
 			CriminosoCrime criminosoCrimeOBJ = new CriminosoCrime(criminoso, crime);
 			sessionObj.delete(criminosoCrimeOBJ);
 

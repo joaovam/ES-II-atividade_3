@@ -31,7 +31,7 @@ public class VitimaCrimeCT {
     public VitimaCrime select(Vitima vitima,Crime crime) {
         return DbOperations_Vitima_Crime.findRecordById(crime,vitima);
     }
-    public void delete(int idCrime, String nomeVitima) {
+    public void delete(String idCrime, String nomeVitima) {
         DbOperations_Vitima_Crime.deleteVitimaCrime(idCrime, nomeVitima);
     }
 }

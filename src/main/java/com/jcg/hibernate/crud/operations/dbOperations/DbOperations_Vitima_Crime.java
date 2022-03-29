@@ -36,21 +36,23 @@ public class DbOperations_Vitima_Crime {
 	}
 
 	// Method 1: This Method Used To Create A New Student Record In The Database Table
-	public static void createVitimaCrime(VitimaCrime vitimaCrimeObj) {
+	public static void createVitimaCrime(VitimaCrime vc) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
-
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", vc.getCrime().getDescricao()).uniqueResult();
+			Vitima vitima = (Vitima) sessionObj.createQuery("from Vitima where nome = :nome").setParameter("nome", vc.getVitima().getNome()).uniqueResult();
+			vc = new VitimaCrime(crime,vitima);
 			// Creating Transaction Entities
 
-			sessionObj.save(vitimaCrimeObj);
+			sessionObj.save(vc);
 
 
 			// Committing The Transactions To The Database
 			sessionObj.getTransaction().commit();
-			System.out.println("\nSuccessfully Created Victim for  the crime:'" + vitimaCrimeObj.getCrime() + "' in The Database!\n");
+			System.out.println("\nSuccessfully Created Victim for  the crime:'" + vc.getCrime() + "' in The Database!\n");
 		} catch(Exception sqlException) {
 			if(null != sessionObj.getTransaction()) {
 				System.out.println("\n.......Transaction Is Being Rolled Back.......\n");
@@ -120,14 +122,14 @@ public class DbOperations_Vitima_Crime {
 	}
 
 	// Method 4(a): This Method Is Used To Delete A Particular Record From The Database Table
-	public static void deleteVitimaCrime(int idCrime,String nomeVitima) {
+	public static void deleteVitimaCrime(String idCrime,String nomeVitima) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 
-			Crime crime = (Crime) sessionObj.createQuery("from Crime where id = :id").setParameter("id", idCrime).uniqueResult();
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", idCrime).uniqueResult();
 			Vitima vitima = (Vitima) sessionObj.createQuery("from Vitima where nome = :nome").setParameter("nome", nomeVitima).uniqueResult();
 			VitimaCrime vitimaCrimeOBJ = new VitimaCrime(crime, vitima);
 			sessionObj.delete(vitimaCrimeOBJ);
@@ -157,7 +159,7 @@ public class DbOperations_Vitima_Crime {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 			//ArmaCrime armaCrimeObj = (ArmaCrime) sessionObj.get( ArmaCrime.class,(new ArmaCrimeId(armaCrime.getArma().getId(),armaCrime.getCrime().getId())));
-			findCrimeVitima = (VitimaCrime) sessionObj.load(VitimaCrime.class, (new VitimaCrimeId(crime.getId(), vitima.getId())));
+			findCrimeVitima = (VitimaCrime) sessionObj.load(VitimaCrime.class, (new VitimaCrimeId(vitima.getId(),crime.getId())));
 		} catch ( ObjectNotFoundException notFoundException){
 			return null;
 		} catch (Exception sqlException) {

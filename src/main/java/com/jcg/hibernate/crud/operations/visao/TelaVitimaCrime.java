@@ -148,7 +148,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
             List<Crime> CrimeBd = mbc.getCrimes();
                 cbPesquisarCrime.removeAllItems();
             for (Crime crime : CrimeBd) {
-                cbPesquisarCrime.addItem(crime.getId() + "-" + crime.getDescricao());
+                cbPesquisarCrime.addItem(crime.getDescricao());
             }
     }
     public void carregaListaVitima(){
@@ -178,14 +178,13 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
                 String nomeVitimaDigitado = cbPesquisarVitima.getSelectedItem().toString().trim();
                 Vitima vitima = vitimaCT.select(nomeVitimaDigitado);
 
-                if (crime.getId()!=Integer.parseInt(nomeCrimeDigitado))
+                if (!crime.getDescricao().contains(nomeCrimeDigitado))
                     JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
 
                 if (!vitima.getNome().contains(nomeVitimaDigitado))
                     JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
 
                 vitimaCrimeCT.createVitimaCrime(crime,vitima);
-
 
                 //Chama o método insert da classe ContatoCT para inserir os dados do objeto Contato (c) de montaContato no banco;
                 this.limpaTela();
@@ -196,14 +195,14 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Associação " + nomeCrimeDigitado +" e" + nomeVitimaDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Criminoso " + txtIdCrime.getText() + " não associado À vitima...");
+                JOptionPane.showMessageDialog(null, "Crime " + txtIdCrime.getText() + " não associado À vitima...");
             }
         } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
             try {
                 //Instancia a classe de controle ContatoCT;
                 String nomeCrimeDigitado = cbPesquisarCrime.getSelectedItem().toString().trim();
-                Crime cbusca = crimeCT.select(Integer.parseInt(nomeCrimeDigitado));
+                Crime cbusca = crimeCT.select(nomeCrimeDigitado);
 
                 String nomeVitimaDigitado = cbPesquisarVitima.getSelectedItem().toString().trim();
                 Vitima vbusca = vitimaCT.select(nomeVitimaDigitado);
@@ -211,7 +210,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
                 VitimaCrime cv = vitimaCrimeCT.select(vbusca,cbusca);
 
 
-                if (cbusca.getId()!=Integer.parseInt(nomeCrimeDigitado)) {
+                if (!cbusca.getDescricao().contains(nomeCrimeDigitado)) {
 
                     JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
 
@@ -242,7 +241,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Vitima e/ou crime nao cadastrados...");
             else {
                 JOptionPane.showMessageDialog(null, "Relação excluida!");
-                vitimaCrimeCT.delete(Integer.parseInt( cbPesquisarCrime.getSelectedItem().toString()), cbPesquisarVitima.getSelectedItem().toString());
+                vitimaCrimeCT.delete(cbPesquisarCrime.getSelectedItem().toString(), cbPesquisarVitima.getSelectedItem().toString().trim());
                 this.limpaTela();
                 this.carregaListaCrime();
                 this.carregaListaVitima();
