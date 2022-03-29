@@ -46,12 +46,12 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
         JLabel lblNome = new JLabel("Nome da Arma:");
         lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
         lblNome.setBounds(10, 79, 109, 14);
-        contentPane.add(lblNome);
+        //contentPane.add(lblNome);
 
         JLabel lblCrime = new JLabel("ID do crime:");
         lblCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
         lblCrime.setBounds(10, 104, 109, 14);
-        contentPane.add(lblCrime);
+        //contentPane.add(lblCrime);
 
         cbPesquisarCrime = new JComboBox<>();
         cbPesquisarCrime.setEditable(true);
@@ -66,13 +66,13 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
         txtNome = new JTextField();
         txtNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
         txtNome.setBounds(129, 76, 283, 20);
-        contentPane.add(txtNome);
+        //contentPane.add(txtNome);
         txtNome.setColumns(10);
 
         idCrime = new JTextField();
         idCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
         idCrime.setBounds(129, 101, 365, 20);
-        contentPane.add(idCrime);
+        //contentPane.add(idCrime);
         idCrime.setColumns(10);
 
         btnSalvar = new JButton("Incluir");
@@ -128,7 +128,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
         List<Crime> CrimeBd =  mbc.getCrimes();
         cbPesquisarCrime.removeAllItems();
         for (Crime crime : CrimeBd) {
-            cbPesquisarCrime.addItem(crime.getId() + "-" + crime.getDescricao());
+            cbPesquisarCrime.addItem(crime.getDescricao());
         }
     }
     public void carregaListaArma(){
@@ -152,13 +152,13 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
             //Condicional - se clicar no botão Salvar ...
             //Instancia a classe de controle ContatoCT;
             try {
-                int idCrimeDigitado = Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString().trim());
-                Crime crime = crimeCT.select(idCrimeDigitado);
+                String nomeDigitado = cbPesquisarCrime.getSelectedItem().toString().trim();
+                Crime crime = crimeCT.select(nomeDigitado);
 
                 String nomeArmaDigitado = cbPesquisarArma.getSelectedItem().toString().trim();
                 Arma arma = armaCT.select(nomeArmaDigitado);
 
-                if (crime.getId()!=idCrimeDigitado)
+                if (!crime.getDescricao().contains(nomeDigitado))
                     JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
 
                 if (!arma.getNome().contains(nomeArmaDigitado))
@@ -173,7 +173,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
                 this.carregaListaCrime();
                 this.carregaListaArma();
                 //Carrega a lista do combobox, atualizando após inserção;
-                JOptionPane.showMessageDialog(null, "Associação " + idCrimeDigitado +" e" + nomeArmaDigitado +"cadastrada...");
+                JOptionPane.showMessageDialog(null, "Associação " + nomeDigitado +" e" + nomeArmaDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Crime " + idCrime.getText() + " não associado À arma...");
@@ -182,8 +182,8 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
             //Condicional - se clicar no botão buscar ...
             try {
                 //Instancia a classe de controle ContatoCT;
-                int idCrimeDigitado = Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString().trim());
-                Crime cbusca = crimeCT.select(idCrimeDigitado);
+                String nome = cbPesquisarCrime.getSelectedItem().toString().trim();
+                Crime cbusca = crimeCT.select(nome);
 
                 String nomeArmaDigitado = cbPesquisarArma.getSelectedItem().toString().trim();
                 Arma vbusca = armaCT.select(nomeArmaDigitado);
@@ -191,7 +191,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
                 ArmaCrime cv = armaCrimeCT.select(vbusca,cbusca);
 
 
-                if (cbusca.getId()!=idCrimeDigitado) {
+                if (!cbusca.getDescricao().contains(nome)) {
 
                     JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
 
@@ -217,12 +217,12 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
 
 
             Arma arma = armaCT.select(cbPesquisarArma.getSelectedItem().toString());
-            Crime crime = crimeCT.select(Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString()));
+            Crime crime = crimeCT.select(cbPesquisarCrime.getSelectedItem().toString());
             if (crime == null  || arma == null)
                 JOptionPane.showMessageDialog(null, "Arma e/ou Crime nao cadastrados...");
             else {
                 JOptionPane.showMessageDialog(null, "Relação excluida!");
-                armaCrimeCT.delete(cbPesquisarArma.getSelectedItem().toString(), Integer.parseInt(cbPesquisarCrime.getSelectedItem().toString()));
+                armaCrimeCT.delete(cbPesquisarArma.getSelectedItem().toString(), cbPesquisarCrime.getSelectedItem().toString());
                 this.limpaTela();
                 this.carregaListaCrime();
                 this.carregaListaArma();

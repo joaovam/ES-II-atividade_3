@@ -2,7 +2,6 @@ package com.jcg.hibernate.crud.operations.dbOperations;
 
 import com.jcg.hibernate.crud.operations.modelo.*;
 import com.jcg.hibernate.crud.operations.modelo.idsCompostos.CriminosoCrimeId;
-import com.jcg.hibernate.crud.operations.modelo.idsCompostos.CriminosoVitimaId;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -158,6 +157,7 @@ public class DbOperations_Criminoso_Crime {
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
 			//ArmaCrime armaCrimeObj = (ArmaCrime) sessionObj.get( ArmaCrime.class,(new ArmaCrimeId(armaCrime.getArma().getId(),armaCrime.getCrime().getId())));
+
 			findCriminosoCrime = (CriminosoCrime) sessionObj.load(CriminosoCrime.class, (new CriminosoCrimeId(criminoso.getId(), crime.getId())));
 		} catch ( ObjectNotFoundException notFoundException){
 			return null;

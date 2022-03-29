@@ -1,11 +1,9 @@
 package com.jcg.hibernate.crud.operations.controle;
 
 
-import com.jcg.hibernate.crud.operations.*;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Crime;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso_Crime;
-import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso_Vitima;
 import com.jcg.hibernate.crud.operations.modelo.*;
 
 import java.util.List;

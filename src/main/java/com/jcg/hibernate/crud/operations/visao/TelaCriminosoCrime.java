@@ -1,6 +1,5 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.*;
 import com.jcg.hibernate.crud.operations.controle.*;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Crime;
 import com.jcg.hibernate.crud.operations.dbOperations.DbOperations_Criminoso;

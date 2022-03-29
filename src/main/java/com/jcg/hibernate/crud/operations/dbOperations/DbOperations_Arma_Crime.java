@@ -42,10 +42,11 @@ public class DbOperations_Arma_Crime {
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
-
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", armaCrimeObj.getCrime().getDescricao()).uniqueResult();
+			Arma arma = (Arma) sessionObj.createQuery("from Arma where nome = :nome").setParameter("nome", armaCrimeObj.getArma().getNome()).uniqueResult();
+			armaCrimeObj = new ArmaCrime(crime, arma);
 			// Creating Transaction Entities
-
-				sessionObj.save(armaCrimeObj);
+			sessionObj.persist(armaCrimeObj);
 
 
 			// Committing The Transactions To The Database
@@ -120,7 +121,7 @@ public class DbOperations_Arma_Crime {
 	}
 
 	// Method 4(a): This Method Is Used To Delete A Particular Record From The Database Table
-	public static void deleteRecord(String nomeArma,int idCrime) {
+	public static void deleteRecord(String nomeArma,String nomeCrime) {
 		try {
 			// Getting Session Object From SessionFactory
 			sessionObj = buildSessionFactory().openSession();
@@ -128,7 +129,7 @@ public class DbOperations_Arma_Crime {
 			sessionObj.beginTransaction();
 
 			Arma arma = (Arma) sessionObj.createQuery("from Arma where nome = :nome").setParameter("nome", nomeArma).uniqueResult();
-			Crime crime = (Crime) sessionObj.createQuery("from Crime where id = :id").setParameter("id", idCrime).uniqueResult();
+			Crime crime = (Crime) sessionObj.createQuery("from Crime where descricao = :descricao").setParameter("descricao", nomeCrime).uniqueResult();
 			ArmaCrime armaCrimeOBJ = new ArmaCrime(crime,arma);
 			sessionObj.delete(armaCrimeOBJ);
 
@@ -156,8 +157,9 @@ public class DbOperations_Arma_Crime {
 			sessionObj = buildSessionFactory().openSession();
 			// Getting Transaction Object From Session Object
 			sessionObj.beginTransaction();
+			//findcriminosoVitimaObj = (CriminosoVitima) sessionObj.load(CriminosoVitima.class, (new CriminosoVitimaId(criminoso.getId(), vitima.getId())))
 			//ArmaCrime armaCrimeObj = (ArmaCrime) sessionObj.get( ArmaCrime.class,(new ArmaCrimeId(armaCrime.getArma().getId(),armaCrime.getCrime().getId())));
-			findArmaCrime = (ArmaCrime) sessionObj.load(ArmaCrime.class, (new ArmaCrimeId(crime.getId(), arma.getId())));
+			findArmaCrime = (ArmaCrime) sessionObj.load(ArmaCrime.class, (new ArmaCrimeId(arma.getId(), crime.getId())));
 		} catch ( ObjectNotFoundException notFoundException){
 			return null;
 		} catch (Exception sqlException) {
