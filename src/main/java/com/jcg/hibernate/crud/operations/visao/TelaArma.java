@@ -1,13 +1,7 @@
 package com.jcg.hibernate.crud.operations.visao;
 
-import com.jcg.hibernate.crud.operations.controle.CriminosoCT;
-import com.jcg.hibernate.crud.operations.controle.CriminosoVitimaCT;
-import com.jcg.hibernate.crud.operations.controle.VitimaCT;
-import com.jcg.hibernate.crud.operations.modelo.Arma;
 import com.jcg.hibernate.crud.operations.controle.ArmaCT;
-import com.jcg.hibernate.crud.operations.modelo.Criminoso;
-import com.jcg.hibernate.crud.operations.modelo.CriminosoVitima;
-import com.jcg.hibernate.crud.operations.modelo.Vitima;
+import com.jcg.hibernate.crud.operations.modelo.Arma;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -164,51 +158,62 @@ public class TelaArma extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals(this.btnSalvar.getActionCommand())) {
             //Condicional - se clicar no botão Salvar ...
-            //Instancia a classe de controle ContatoCT;
-            try {
-                String nomeArmaDigitado = cbPesquisarArma.getSelectedItem().toString().trim();
-                Arma arma = armaCT.select(nomeArmaDigitado);
-
-
-
-                if (!arma.getNome().contains(nomeArmaDigitado))
-                    JOptionPane.showMessageDialog(null, "Arma nao cadastrada...");
-
-
-                //Chama o método insert da classe ContatoCT para inserir os dados do objeto Contato (c) de montaContato no banco;
-                this.limpaTela();
-                //Limpa os campos após inserir/salvar dados no banco;
-                this.carregaListaArma();
-                //Carrega a lista do combobox, atualizando após inserção;
-                JOptionPane.showMessageDialog(null, "Arma " + nomeArmaDigitado +"cadastrada");
-                //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Arma " + txtNome.getText() + " não cadastrada...");
-            }
+            Arma a = this.montaArma();
+            //Chama o método montaContato para pegar os dados e gravar no objeto c;
+            //Instancia a classe de controle ArmaCT;
+            armaCT.createArma(a.getTipo(), a.getNome());
+            this.limpaTela();
+            //Limpa os campos após inserir/salvar dados no banco;
+            this.carregaListaArma();
+            //Carrega a lista do combobox, atualizando após inserção;
+            JOptionPane.showMessageDialog(null, "Arma " + txtNome.getText() + " cadastrada...");
+            //Abre diálogo de mensagem, informando que o cliente foi cadastrada;
         } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
-            try {
-                //Instancia a classe de controle ContatoCT;
-                String nomeArmaDigitado = cbPesquisarArma.getSelectedItem().toString().trim();
-                Arma cbusca = armaCT.select(nomeArmaDigitado);
+            //Instancia a classe de controle ArmaCT;
+            String nomeDigitado = cbPesquisarArma.getSelectedItem().toString().trim();
+            Arma abusca = armaCT.select(nomeDigitado);
+            if (abusca.getNome().contains(nomeDigitado.trim())) {
+                JOptionPane.showMessageDialog(null, "Arma encontrado!");
+                this.carregaArmanaTela(abusca);
+            } else {
+                JOptionPane.showMessageDialog(null, "Arma nao cadastrada...");
 
-
-                if (!cbusca.getNome().contains(nomeArmaDigitado)) {
-
-                    JOptionPane.showMessageDialog(null, "Arma nao cadastrada...");
-                }else {
-                    this.carregaListaArma();
-                }
-            }catch (Exception ex){
-                JOptionPane.showMessageDialog(null, "Algo deu errado... ");
             }
         } else if (e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
             this.limpaTela();
+        } else if (e.getActionCommand().equals(this.btnExcluir.getActionCommand())) {
+
+
+            Arma abusca = armaCT.select(cbPesquisarArma.getSelectedItem().toString());
+            if (abusca == null)
+                JOptionPane.showMessageDialog(null, "Arma nao cadastrada...");
+            else {
+                JOptionPane.showMessageDialog(null, "Arma excluido!");
+                this.carregaArmanaTela(abusca);
+                armaCT.delete(abusca);
+                this.limpaTela();
+                this.carregaListaArma();
+            }
+        }
+        if (e.getActionCommand().equals(this.btnEditar.getActionCommand())) {
+
+            //Instancia a classe de controle ArmaCT;
+            Arma abusca = armaCT.select(cbPesquisarArma.getSelectedItem().toString());
+            if (abusca == null)
+                JOptionPane.showMessageDialog(null, "Arma nao cadastrada...");
+            else {
+                JOptionPane.showMessageDialog(null, "Arma editado!");
+                abusca.setNome(txtNome.getText());
+                abusca.setTipo(txtTipo.getText());
+                armaCT.update(this.editaArma(abusca.getId()));
+                this.limpaTela();
+                this.carregaListaArma();
+            }
         }
 
 
     }
-    
 
     
 }

@@ -97,7 +97,8 @@ public class DbOperations_Arma {
 
 			// Creating Transaction Entity
 			Arma armaObj = (Arma) sessionObj.get(Arma.class, arma.getId());
-			armaObj = arma;
+			armaObj.setTipo(arma.getTipo());
+			armaObj.setNome(arma.getNome());
 
 
 			// Committing The Transactions To The Database

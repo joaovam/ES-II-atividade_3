@@ -30,7 +30,7 @@ public class ArmaCrimeCT {
         return DbOperations_Arma_Crime.findRecordById(crime,arma);
     }
 
-    public void delete(String armaNome, int idCrime) {
-        DbOperations_Arma_Crime.deleteRecord(armaNome,idCrime);
+    public void delete(String armaNome, String nomeCrime) {
+        DbOperations_Arma_Crime.deleteRecord(armaNome,nomeCrime);
     }
 }
