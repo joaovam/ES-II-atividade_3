@@ -45,15 +45,15 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
         lblPesquisar.setBounds(10, 31, 109, 14);
         contentPane.add(lblPesquisar);
 
-        JLabel lblNome = new JLabel("Nome do criminoso:");
-        lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblNome.setBounds(10, 79, 109, 14);
-        contentPane.add(lblNome);
-
-        JLabel lblid = new JLabel("id do crime:");
-        lblid.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblid.setBounds(10, 104, 109, 14);
-        contentPane.add(lblid);
+//        JLabel lblNome = new JLabel("Nome do criminoso:");
+//        lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+//        lblNome.setBounds(10, 79, 109, 14);
+//        contentPane.add(lblNome);
+//
+//        JLabel lblid = new JLabel("Descrição do crime:");
+//        lblid.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+//        lblid.setBounds(10, 104, 109, 14);
+//        contentPane.add(lblid);
 
 
 
@@ -181,7 +181,7 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e" + nomeDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado ao crime...");
+                JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado ao crime escolhido...");
             }
         } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
@@ -203,7 +203,7 @@ public class TelaCriminosoCrime extends JFrame implements ActionListener {
                 }
                 if (!crime.getDescricao().contains(idCrime)) {
 
-                    JOptionPane.showMessageDialog(null, "Crime nao cadastrada...");
+                    JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
                 }
                 if (cv.getCriminoso() != null && cv.getCrime() != null) {
                     JOptionPane.showMessageDialog(null, "Relação encontrada! " + cbusca.getNome() + "cometeu um crime cuja descrição foi " + crime.getDescricao());

@@ -43,14 +43,14 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
         lblPesquisar.setBounds(10, 31, 109, 14);
         contentPane.add(lblPesquisar);
 
-        JLabel lblNome = new JLabel("Nome da Arma:");
-        lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblNome.setBounds(10, 79, 109, 14);
-        //contentPane.add(lblNome);
-
-        JLabel lblCrime = new JLabel("ID do crime:");
-        lblCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblCrime.setBounds(10, 104, 109, 14);
+//        JLabel lblNome = new JLabel("Nome da Arma:");
+//        lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+//        lblNome.setBounds(10, 79, 109, 14);
+//        //contentPane.add(lblNome);
+//
+//        JLabel lblCrime = new JLabel("ID do crime:");
+//        lblCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+//        lblCrime.setBounds(10, 104, 109, 14);
         //contentPane.add(lblCrime);
 
         cbPesquisarCrime = new JComboBox<>();
@@ -159,7 +159,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
                 Arma arma = armaCT.select(nomeArmaDigitado);
 
                 if (!crime.getDescricao().contains(nomeDigitado))
-                    JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                    JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
 
                 if (!arma.getNome().contains(nomeArmaDigitado))
                     JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
@@ -176,7 +176,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Associação " + nomeDigitado +" e" + nomeArmaDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Crime " + idCrime.getText() + " não associado À arma...");
+                JOptionPane.showMessageDialog(null, "Crime " + idCrime.getText() + " não associado à arma...");
             }
         } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
@@ -193,7 +193,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
 
                 if (!cbusca.getDescricao().contains(nome)) {
 
-                    JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                    JOptionPane.showMessageDialog(null, "Crime não cadastrado...");
 
                 }
                 if (!vbusca.getNome().contains(nomeArmaDigitado)) {

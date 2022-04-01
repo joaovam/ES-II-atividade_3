@@ -52,15 +52,15 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
         lblPesquisar.setBounds(10, 31, 109, 14);
         contentPane.add(lblPesquisar);
 
-        JLabel lblNome = new JLabel("Nome da Vitima:");
-        lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblNome.setBounds(10, 79, 109, 14);
-        contentPane.add(lblNome);
-
-        JLabel lblIdCrime = new JLabel("Id do Crime");
-        lblIdCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
-        lblIdCrime.setBounds(10, 104, 109, 14);
-        contentPane.add(lblIdCrime);
+//        JLabel lblNome = new JLabel("Nome da Vitima:");
+//        lblNome.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+//        lblNome.setBounds(10, 79, 109, 14);
+//        contentPane.add(lblNome);
+//
+//        JLabel lblIdCrime = new JLabel("Id do Crime");
+//        lblIdCrime.setFont(new Font("Franklin Gothic Book", Font.BOLD, 12));
+//        lblIdCrime.setBounds(10, 104, 109, 14);
+//        contentPane.add(lblIdCrime);
 
 
         cbPesquisarCrime = new JComboBox();
@@ -195,7 +195,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Associação " + nomeCrimeDigitado +" e" + nomeVitimaDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Crime " + txtIdCrime.getText() + " não associado À vitima...");
+                JOptionPane.showMessageDialog(null, "Crime " + txtIdCrime.getText() + " não associado à vitima...");
             }
         } else if (e.getActionCommand().equals(this.btnPesquisar.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
