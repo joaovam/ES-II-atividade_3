@@ -174,7 +174,7 @@ public class TelaArma extends JFrame implements ActionListener {
             String nomeDigitado = cbPesquisarArma.getSelectedItem().toString().trim();
             Arma abusca = armaCT.select(nomeDigitado);
             if (abusca.getNome().contains(nomeDigitado.trim())) {
-                JOptionPane.showMessageDialog(null, "Arma encontrado!");
+                JOptionPane.showMessageDialog(null, "Arma encontrada!");
                 this.carregaArmanaTela(abusca);
             } else {
                 JOptionPane.showMessageDialog(null, "Arma nao cadastrada...");

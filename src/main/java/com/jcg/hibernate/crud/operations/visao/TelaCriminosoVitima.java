@@ -170,7 +170,7 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
                 this.carregaListaCriminoso();
                 this.carregaListaVitima();
                 //Carrega a lista do combobox, atualizando após inserção;
-                JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e" + nomeVitimaDigitado +"cadastrada...");
+                JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e " + nomeVitimaDigitado +" cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado à vitima...");
@@ -198,7 +198,7 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
                 }
                 if (cv.getCriminoso() != null && cv.getVitima() != null) {
-                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + cbusca.getNome() + "cometeu um crime cuja vítima foi " + vbusca.getNome());
+                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + cbusca.getNome() + " cometeu um crime cuja vítima foi " + vbusca.getNome());
                 } else {
                     JOptionPane.showMessageDialog(null, "Associação não encontrada...");
                 }

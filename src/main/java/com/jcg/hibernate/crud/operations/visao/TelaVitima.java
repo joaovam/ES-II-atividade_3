@@ -217,9 +217,9 @@ public class TelaVitima extends JFrame implements ActionListener {
 
             Vitima cbusca = controle_vitima.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Vitima nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Vítima nao cadastrado...");
             else {
-                JOptionPane.showMessageDialog(null, "Vitima excluido!");
+                JOptionPane.showMessageDialog(null, "Vítima excluido!");
                 this.carregaVitimanaTela(cbusca);
                 controle_vitima.delete(cbusca);
                 this.limpaTela();
@@ -231,9 +231,9 @@ public class TelaVitima extends JFrame implements ActionListener {
             //Instancia a classe de controle VitimaCT;
             Vitima cbusca = controle_vitima.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Vitima nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Vítima nao cadastrada...");
             else {
-                JOptionPane.showMessageDialog(null, "Vitima editado!");
+                JOptionPane.showMessageDialog(null, "Vítima editada!");
                 cbusca.setCpf(txtCpfVitima.getText());
                 cbusca.setNome(txtNomeVitima.getText());
                 cbusca.setGenero(txtGeneroVitima.getText());

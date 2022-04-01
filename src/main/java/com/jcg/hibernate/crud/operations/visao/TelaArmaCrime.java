@@ -201,7 +201,7 @@ public class TelaArmaCrime extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
                 }
                 if (cv.getCrime() != null && cv.getArma() != null) {
-                    JOptionPane.showMessageDialog(null, "Relação encontrada! Crime de ID" + cbusca.getId() + "foi cometido com arma: " + vbusca.getNome());
+                    JOptionPane.showMessageDialog(null, "Relação encontrada! Crime de ID: " + cbusca.getId() + "foi cometido com arma: " + vbusca.getNome());
                 } else {
                     JOptionPane.showMessageDialog(null, "Associação não encontrada...");
                 }

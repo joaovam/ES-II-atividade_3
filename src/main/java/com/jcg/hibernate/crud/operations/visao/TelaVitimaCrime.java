@@ -220,7 +220,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
                 }
                 if (cv.getCrime() != null && cv.getVitima() != null) {
-                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + vbusca.getNome() + "foi acometido pelo crime " + cbusca.toString());
+                    JOptionPane.showMessageDialog(null, "Relação encontrada! " + vbusca.getNome() + " foi acometido pelo crime " + cbusca.toString());
                 } else {
                     JOptionPane.showMessageDialog(null, "Associação não encontrada...");
                 }
@@ -238,7 +238,7 @@ public class TelaVitimaCrime extends JFrame implements ActionListener {
             Vitima vitima = vitimaCT.select(cbPesquisarVitima.getSelectedItem().toString());
             Crime crime = crimeCT.select(cbPesquisarCrime.getSelectedItem().toString());
             if (crime == null  || vitima == null)
-                JOptionPane.showMessageDialog(null, "Vitima e/ou crime nao cadastrados...");
+                JOptionPane.showMessageDialog(null, "Vítima e/ou crime nao cadastrados...");
             else {
                 JOptionPane.showMessageDialog(null, "Relação excluida!");
                 vitimaCrimeCT.delete(cbPesquisarCrime.getSelectedItem().toString(), cbPesquisarVitima.getSelectedItem().toString().trim());
