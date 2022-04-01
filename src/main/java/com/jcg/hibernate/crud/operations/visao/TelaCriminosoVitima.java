@@ -156,10 +156,10 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
                 Vitima vitima = vitimaCT.select(nomeVitimaDigitado);
 
                 if (!criminoso.getNome().contains(nomeCriminosoDigitado))
-                    JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                    JOptionPane.showMessageDialog(null, "Criminoso não cadastrado...");
 
                 if (!vitima.getNome().contains(nomeVitimaDigitado))
-                    JOptionPane.showMessageDialog(null, "Vitima nao cadastrada...");
+                    JOptionPane.showMessageDialog(null, "Vítima não cadastrada...");
 
                 criminosoVitimaCT.createCriminosoVitima(nomeCriminosoDigitado, nomeVitimaDigitado);
 
@@ -173,7 +173,7 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Associação " + nomeCriminosoDigitado +" e" + nomeVitimaDigitado +"cadastrada...");
                 //Abre diálogo de mensagem, informando que o cliente foi cadastrado;
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado À vitima...");
+                JOptionPane.showMessageDialog(null, "Criminoso " + txtNomeCriminoso.getText() + " não associado à vitima...");
             }
         } else if (e.getActionCommand().equals(this.btnPesquisarCriminosoVitima.getActionCommand())) {
             //Condicional - se clicar no botão buscar ...
@@ -216,9 +216,9 @@ public class TelaCriminosoVitima extends JFrame implements ActionListener {
             Vitima vitima = vitimaCT.select(cbPesquisarVitima.getSelectedItem().toString());
             Criminoso criminoso = criminosoCT.select(cbPesquisarCriminoso.getSelectedItem().toString());
             if (criminoso == null  || vitima == null)
-                JOptionPane.showMessageDialog(null, "Vitima e/ou criminoso nao cadastrados...");
+                JOptionPane.showMessageDialog(null, "Vítima e/ou criminoso não cadastrados...");
             else {
-                JOptionPane.showMessageDialog(null, "Relação excluida!");
+                JOptionPane.showMessageDialog(null, "Relação excluída!");
                 criminosoVitimaCT.delete(cbPesquisarCriminoso.getSelectedItem().toString(), cbPesquisarVitima.getSelectedItem().toString());
                 this.limpaTela();
                 this.carregaListaCriminoso();

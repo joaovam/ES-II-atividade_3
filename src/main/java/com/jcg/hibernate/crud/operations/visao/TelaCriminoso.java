@@ -219,7 +219,7 @@ public class TelaCriminoso extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Criminoso encontrado!");
                 this.carregaCriminosonaTela(cbusca);
             } else {
-                JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Criminoso não cadastrado...");
 
             }
         } else if (e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
@@ -229,9 +229,9 @@ public class TelaCriminoso extends JFrame implements ActionListener {
 
             Criminoso cbusca = controle_criminoso.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Criminoso não cadastrado...");
             else {
-                JOptionPane.showMessageDialog(null, "Criminoso excluido!");
+                JOptionPane.showMessageDialog(null, "Criminoso excluído!");
                 this.carregaCriminosonaTela(cbusca);
                 controle_criminoso.delete(cbusca);
                 this.limpaTela();
@@ -243,7 +243,7 @@ public class TelaCriminoso extends JFrame implements ActionListener {
             //Instancia a classe de controle CriminosoCT;
             Criminoso cbusca = controle_criminoso.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Criminoso nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Criminoso não cadastrado...");
             else {
                 JOptionPane.showMessageDialog(null, "Criminoso editado!");
                 cbusca.setCpf(txtCpfCriminoso.getText());

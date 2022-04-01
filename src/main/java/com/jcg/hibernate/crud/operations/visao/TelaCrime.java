@@ -236,7 +236,7 @@ public class TelaCrime extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Crime encontrado!");
                 this.carregaCrimenaTela(cbusca);
             } else {
-                JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Crime não cadastrado...");
 
             }
         } else if (e.getActionCommand().equals(this.btnLimpar.getActionCommand())) {
@@ -245,7 +245,7 @@ public class TelaCrime extends JFrame implements ActionListener {
 
             Crime cbusca = controle_crime.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Crime não cadastrado...");
             else {
                 JOptionPane.showMessageDialog(null, "Crime excluido!");
                 this.carregaCrimenaTela(cbusca);
@@ -259,7 +259,7 @@ public class TelaCrime extends JFrame implements ActionListener {
             //Instancia a classe de controle CrimeCT;
             Crime cbusca = controle_crime.select(cbPesquisar.getSelectedItem().toString());
             if (cbusca == null)
-                JOptionPane.showMessageDialog(null, "Crime nao cadastrado...");
+                JOptionPane.showMessageDialog(null, "Crime não cadastrado...");
             else {
                 JOptionPane.showMessageDialog(null, "Crime editado!");
                 cbusca.setDescricao(txtDescricaoCrime.getText());
